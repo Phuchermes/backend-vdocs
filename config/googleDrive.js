@@ -1,12 +1,10 @@
 const { google } = require("googleapis");
-const path = require("path");
 
-const KEYFILEPATH = path.join(__dirname, "./magnetic-runway-479704-b7-a3557072f35c.json");
-const SCOPES = ["https://www.googleapis.com/auth/drive"];
+const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: KEYFILEPATH,
-  scopes: SCOPES,
+  credentials: serviceAccount,
+  scopes: ["https://www.googleapis.com/auth/drive"],
 });
 
 const drive = google.drive({ version: "v3", auth });
