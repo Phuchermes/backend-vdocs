@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "magnetic-runway-479704-b7",
+  "private_key_id": "a3557072f35c3649253836b53c36e3f640453acf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDMS3pu8CbUK7Qf\ndoTHzfoClmgbAUXNEBqYrgn18yAX+kB7sMrRLowpzziVOuSV1QjJ9PwvXWdEtvM/\nHejf6rt5z3/5bqLenYMzPNtr2UKYAGQOMc9jWosHeaA5o2xP2NY/krvpIOH9IqoO\nsa7I9xVM/OsbO11pHcrX8Q0OsgnhBFZ3rQiokECVpuQrP6KcmjaJsujKyPwJ9/fa\nEsrzvDf/M8p9XPTzqRPdhlvgGmHaOUr42z56DbvIERklBcemncQHcTWmSp9ky4sr\n59lpgLy3+n9pnyUq94VrS15q2tFbHNwLvBzbT27wDcMIUVTopIlbpQS0FJYXzB5R\nmIVFhNFjAgMBAAECggEAA1HirnTWnLINHknFxJ1zR6F8FZxCrx9o3zxMyyNlTR5y\n98+arCWOf4tvhvVLC6hHmUiS5I4nBHXYpBjvVNwyqbsWgE4s9WMn46hEhI8mRuQS\nvCxRC3NIORnf4a/nLbD/Yk8XIKW5JmzuyIhYp8lkHjkp9OpVDUU/q5yuMqPwBykM\nbi8HbfXSY8fPyifVB4V/NJ4QUkAAUmjlwgNc0zaLUguh0H9wy/tivJme8GEW1kUJ\nhWO0N1KIbsZ1CK66ThFT0e0T9sg0orxqUmReFs5JOEr0Bw3PjKL2k4Dawb9B/L74\nIZYohJc2LIC5fmYFc/1wWddC8faSzOE235xhiFDQmQKBgQD3GjjtuX1eoLfRSb6q\nQXFE65p9oSKpOzDb8sAzmtktuw0Pa6x54ZMli9pbDrKbRHJK4DUlsiiM013AYtwl\nL1JEKYA9i+O1aeithX2ECOgiNqS6I3R2rzi2nctCAGDpEh+wdyr+KaS5OYA6D0F/\nImR/TSQeYxInjKa2/+0RDkOuJwKBgQDTpqhcFAf7SrMVSuETbvwPKAGY/78vX6vo\nAQOL6UOK9z4Usq4BlFNLWQmevqY4rV1JEWIqUmly6HfHibtOJLGvpAkIe3kVBXNR\nUSgdVAGkOLMzH77ZKadwtChPtjDlo9yCOOoIo8pBcKDEE2EeH++sAKemzaPH2rT3\nlh2ZEPOEZQKBgQDxw3U5mkeAYy0WFtn2iGsDbKTOD+7yttf6CwtkMjgVFzMTCF1L\nLpoinS+58apsYc6VVcKKLEKiblcG2XLc6uzJhfVTwl+7anDd/YKtwW0ltGL9P50+\nVffeLIrm+6nVwAbDSAUHgcUJ+KltpOmHMyYyq04QcQwdJ+8hk0rmahdr9wKBgAI+\nlzR6xeblUObd52skVyn1+6Zat/VRp2oLcLUwIRY9LvxbNLsxjnyTEiYL0YlyVTXs\nKEVYoGOmkXadQE5A112MeMgNPyh46VMocCt3c5kBPO1C3exBo9PvJSpLPVOCHFmJ\nLvouenudLSdHKVV/czQ4wY5kSeNZr2ecwO2Zn2t9AoGAS5cpTUT0GjcKuqECC3yI\n7za3Cz1VMygCgppNFNL86iun8hl9EalNwvr5MyjiQciYoSWGscxcdKg6hk6OG43d\nyhHjgNg7jABhw9JhRiJ2c8OZkquqPCHC7pkq5emotRSabR/Vyo6qvA9ahnm8hJhX\nhRcNBRhRJgb7khuU63gEruc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "pdf-backend-service@magnetic-runway-479704-b7.iam.gserviceaccount.com",
+  "client_id": "105599629598434146743",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pdf-backend-service%40magnetic-runway-479704-b7.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
