@@ -3,14 +3,15 @@ const { Readable } = require("stream");
 const drive = require("../config/googleDrive");
 const Document = require("../models/Document");
 
-// Thay bằng Folder ID Google Drive của bạn
-const DRIVE_FOLDER_ID = "https://drive.google.com/drive/folders/1oIfxwzlKI0DRpwJIZSY6uLVCWpfsmaeB";
+// CHỈ folderId, KHÔNG để nguyên URL Google Drive
+const DRIVE_FOLDER_ID = process.env.GOOGLE_DRIVE_FOLDER_ID;
 
 /**
- * Upload PDF lên Google Drive và lưu metadata MongoDB
+ * Upload PDF lên Google Drive và lưu metadata
  */
 exports.uploadDocument = async (req, res) => {
   try {
+    // CHỈ HDCX được upload
     if (req.user.department !== "HDCX")
       return res.status(403).json({ error: "Không có quyền" });
 
@@ -18,15 +19,15 @@ exports.uploadDocument = async (req, res) => {
 
     const fileName = Date.now() + "-" + req.file.originalname.replace(/\s+/g, "_");
 
-    // Chuyển buffer thành stream
+    // Tạo stream từ buffer
     const stream = Readable.from(req.file.buffer);
 
     // Upload lên Google Drive
     const response = await drive.files.create({
       requestBody: {
         name: fileName,
+        parents: [DRIVE_FOLDER_ID], // ĐÃ FIX: chỉ folderId
         mimeType: "application/pdf",
-        parents: [DRIVE_FOLDER_ID],
       },
       media: {
         mimeType: "application/pdf",
@@ -35,7 +36,7 @@ exports.uploadDocument = async (req, res) => {
       fields: "id, webViewLink, webContentLink",
     });
 
-    // Lưu metadata vào MongoDB
+    // Lưu metadata MongoDB
     const doc = await Document.create({
       title: req.body.title || req.file.originalname,
       description: req.body.description || "",
@@ -43,18 +44,18 @@ exports.uploadDocument = async (req, res) => {
       fileName,
       webViewLink: response.data.webViewLink,
       webContentLink: response.data.webContentLink,
-      department: "HDCX",
+      department: "HDCX", // CHỈ HDCX xem được
     });
 
     res.json({ success: true, document: doc });
   } catch (err) {
-    console.error("Upload error:", err);
-    res.status(500).json({ error: "Upload lỗi" });
+    console.error("Upload error:", err.response?.data || err);
+    res.status(500).json({ error: "Upload lỗi", details: err.message });
   }
 };
 
 /**
- * Lấy link WebView PDF cho React Native
+ * Lấy file PDF (webViewLink) — CHỈ HDCX được xem
  */
 exports.getDocumentFile = async (req, res) => {
   try {
@@ -72,7 +73,7 @@ exports.getDocumentFile = async (req, res) => {
 };
 
 /**
- * Lấy danh sách tất cả tài liệu
+ * Lấy danh sách tài liệu — CHỈ HDCX
  */
 exports.getAllDocuments = async (req, res) => {
   try {
