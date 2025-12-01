@@ -1,8 +1,6 @@
 // controllers/documentController.js
-const { Readable } = require("stream");
-const drive = require("../config/googleDrive");
 const Document = require("../models/Document");
-import { v2 as cloudinary } from "cloudinary";
+const cloudinary = require("cloudinary").v2;
 
 // Cloudinary config từ environment variables
 cloudinary.config({
@@ -11,19 +9,13 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET,
 });
 
-export const uploadDocument = async (req, res) => {
+const uploadDocument = async (req, res) => {
   try {
-    // CHỈ HDCX được upload
-    if (req.user.department !== "HDCX")
-      return res.status(403).json({ error: "Không có quyền" });
+    if (req.user.department !== "HDCX") return res.status(403).json({ error: "Không có quyền" });
+    if (!req.file) return res.status(400).json({ error: "Không có file" });
 
-    if (!req.file)
-      return res.status(400).json({ error: "Không có file" });
+    const fileName = Date.now() + "-" + req.file.originalname.replace(/\s+/g, "_");
 
-    const fileName =
-      Date.now() + "-" + req.file.originalname.replace(/\s+/g, "_");
-
-    // Upload PDF từ buffer
     const result = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         { resource_type: "raw", public_id: fileName },
@@ -35,13 +27,12 @@ export const uploadDocument = async (req, res) => {
       uploadStream.end(req.file.buffer);
     });
 
-    // Lưu metadata MongoDB
     const doc = await Document.create({
       title: req.body.title || req.file.originalname,
       description: req.body.description || "",
       fileName,
-      publicUrl: result.secure_url, // public URL Cloudinary
-      department: "HDCX", // CHỈ HDCX xem được
+      publicUrl: result.secure_url,
+      department: "HDCX",
     });
 
     res.json({ success: true, document: doc });
@@ -54,7 +45,7 @@ export const uploadDocument = async (req, res) => {
 /**
  * Lấy file PDF (publicUrl) — CHỈ HDCX được xem
  */
-export const getDocumentFile = async (req, res) => {
+const getDocumentFile = async (req, res) => {
   try {
     if (req.user.department !== "HDCX")
       return res.status(403).json({ error: "Không quyền" });
@@ -73,7 +64,7 @@ export const getDocumentFile = async (req, res) => {
 /**
  * Lấy danh sách tài liệu — CHỈ HDCX
  */
-export const getAllDocuments = async (req, res) => {
+const getAllDocuments = async (req, res) => {
   try {
     if (req.user.department !== "HDCX")
       return res.status(403).json({ error: "Không có quyền" });
@@ -85,3 +76,6 @@ export const getAllDocuments = async (req, res) => {
     res.status(500).json({ error: "Lỗi server" });
   }
 };
+
+module.exports = { uploadDocument, getDocumentFile, getAllDocuments };
+
