@@ -28,13 +28,12 @@ const uploadDocument = async (req, res) => {
     });
 
     const doc = await Document.create({
-      title: req.body.title || req.file.originalname,
-      description: req.body.description || "",
-      fileName,
-      publicUrl: result.secure_url,
-      department: "HDCX",
-    });
-
+  title: req.body.title || req.file.originalname,
+  description: req.body.description || "",
+  fileName,
+  publicUrl: result.secure_url,
+  department: "HDCX",
+});
     res.json({ success: true, document: doc });
   } catch (err) {
     console.error("Upload error:", err);
