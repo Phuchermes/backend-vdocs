@@ -11,4 +11,10 @@ const connectDB = async () => {
   }
 };
 
+mongoose.connect(process.env.MONGO_URI, {
+  maxPoolSize: 50, // tăng để handle >100 connections
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
 module.exports = connectDB;

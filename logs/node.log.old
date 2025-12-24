@@ -1,0 +1,284 @@
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-12-23T14:25:18: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-12-23T14:25:18: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-12-23T14:25:18: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-12-23T14:25:18: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-12-23T14:25:18: Server running on port 3000 (IPv4 + IPv6)
+2025-12-23T14:25:18: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-12-23T14:25:18: Server running on port 3000 (IPv4 + IPv6)
+2025-12-23T14:25:18: Server running on port 3000 (IPv4 + IPv6)
+2025-12-23T14:25:18: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-12-23T14:25:18: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-12-23T14:25:18: Server running on port 3000 (IPv4 + IPv6)
+2025-12-23T14:25:18: Server running on port 3000 (IPv4 + IPv6)
+2025-12-23T14:25:18: MongoDB connected
+2025-12-23T14:25:18: MongoDB connected
+2025-12-23T14:25:18: Server running on port 3000 (IPv4 + IPv6)
+2025-12-23T14:25:18: Server running on port 3000 (IPv4 + IPv6)
+2025-12-23T14:25:18: MongoDB connected
+2025-12-23T14:25:18: MongoDB connected
+2025-12-23T14:25:18: MongoDB connected
+2025-12-23T14:25:18: MongoDB connected
+2025-12-23T14:25:18: MongoDB connected
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-12-23T14:25:18: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (C:\V-Docs_Backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:237:11)
+    at NativeConnection.openUri (C:\V-Docs_Backend\node_modules\mongoose\lib\connection.js:1075:34)
+    at Mongoose.connect (C:\V-Docs_Backend\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\V-Docs_Backend\dbsetup.js:14:10)
+    at Module._compile (node:internal/modules/cjs/loader:1688:14)
+    at Object..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-12-23T14:25:18: Server running on port 3000 (IPv4 + IPv6)
+2025-12-23T14:25:18: MongoDB connected
+2025-12-23T14:26:18: heartbeat 1766474778091
+2025-12-23T14:26:18: heartbeat 1766474778094
+2025-12-23T14:26:18: heartbeat 1766474778093
+2025-12-23T14:26:18: heartbeat 1766474778093
+2025-12-23T14:26:18: heartbeat 1766474778093
+2025-12-23T14:26:18: heartbeat 1766474778101
+2025-12-23T14:26:18: heartbeat 1766474778102
+2025-12-23T14:26:18: heartbeat 1766474778235
+2025-12-23T14:27:18: heartbeat 1766474838091
+2025-12-23T14:27:18: heartbeat 1766474838093
+2025-12-23T14:27:18: heartbeat 1766474838093
+2025-12-23T14:27:18: heartbeat 1766474838094
+2025-12-23T14:27:18: heartbeat 1766474838095
+2025-12-23T14:27:18: heartbeat 1766474838101
+2025-12-23T14:27:18: heartbeat 1766474838102
+2025-12-23T14:27:18: heartbeat 1766474838236
+2025-12-23T14:28:18: heartbeat 1766474898092
+2025-12-23T14:28:18: heartbeat 1766474898093
+2025-12-23T14:28:18: heartbeat 1766474898094
+2025-12-23T14:28:18: heartbeat 1766474898095
+2025-12-23T14:28:18: heartbeat 1766474898096
+2025-12-23T14:28:18: heartbeat 1766474898102
+2025-12-23T14:28:18: heartbeat 1766474898103
+2025-12-23T14:28:18: heartbeat 1766474898236
+2025-12-23T14:29:18: heartbeat 1766474958091
+2025-12-23T14:29:18: heartbeat 1766474958093
+2025-12-23T14:29:18: heartbeat 1766474958093
+2025-12-23T14:29:18: heartbeat 1766474958096
+2025-12-23T14:29:18: heartbeat 1766474958097
+2025-12-23T14:29:18: heartbeat 1766474958101
+2025-12-23T14:29:18: heartbeat 1766474958103
+2025-12-23T14:29:18: heartbeat 1766474958238
+2025-12-23T14:30:18: heartbeat 1766475018091
+2025-12-23T14:30:18: heartbeat 1766475018094
+2025-12-23T14:30:18: heartbeat 1766475018094
+2025-12-23T14:30:18: heartbeat 1766475018097
+2025-12-23T14:30:18: heartbeat 1766475018098
+2025-12-23T14:30:18: heartbeat 1766475018101
+2025-12-23T14:30:18: heartbeat 1766475018104
+2025-12-23T14:30:18: heartbeat 1766475018237
+2025-12-23T14:31:18: heartbeat 1766475078091
+2025-12-23T14:31:18: heartbeat 1766475078093
+2025-12-23T14:31:18: heartbeat 1766475078094
+2025-12-23T14:31:18: heartbeat 1766475078097
+2025-12-23T14:31:18: heartbeat 1766475078098
+2025-12-23T14:31:18: heartbeat 1766475078101
+2025-12-23T14:31:18: heartbeat 1766475078103
+2025-12-23T14:31:18: heartbeat 1766475078237
+2025-12-23T14:32:18: heartbeat 1766475138092
+2025-12-23T14:32:18: heartbeat 1766475138094
+2025-12-23T14:32:18: heartbeat 1766475138095
+2025-12-23T14:32:18: heartbeat 1766475138098
+2025-12-23T14:32:18: heartbeat 1766475138099
+2025-12-23T14:32:18: heartbeat 1766475138102
+2025-12-23T14:32:18: heartbeat 1766475138104
+2025-12-23T14:32:18: heartbeat 1766475138237
+2025-12-23T14:33:18: heartbeat 1766475198092
+2025-12-23T14:33:18: heartbeat 1766475198094
+2025-12-23T14:33:18: heartbeat 1766475198095
+2025-12-23T14:33:18: heartbeat 1766475198098
+2025-12-23T14:33:18: heartbeat 1766475198100
+2025-12-23T14:33:18: heartbeat 1766475198102
+2025-12-23T14:33:18: heartbeat 1766475198104
+2025-12-23T14:33:18: heartbeat 1766475198237
+2025-12-23T14:34:18: heartbeat 1766475258093
+2025-12-23T14:34:18: heartbeat 1766475258094
+2025-12-23T14:34:18: heartbeat 1766475258095
+2025-12-23T14:34:18: heartbeat 1766475258098
+2025-12-23T14:34:18: heartbeat 1766475258100
+2025-12-23T14:34:18: heartbeat 1766475258103
+2025-12-23T14:34:18: heartbeat 1766475258105
+2025-12-23T14:34:18: heartbeat 1766475258237
+2025-12-23T14:35:18: heartbeat 1766475318094
+2025-12-23T14:35:18: heartbeat 1766475318096
+2025-12-23T14:35:18: heartbeat 1766475318097
+2025-12-23T14:35:18: heartbeat 1766475318099
+2025-12-23T14:35:18: heartbeat 1766475318101
+2025-12-23T14:35:18: heartbeat 1766475318104
+2025-12-23T14:35:18: heartbeat 1766475318106
+2025-12-23T14:35:18: heartbeat 1766475318237
+================================================== 
+[Tue 12/23/2025 14:36:10.20] SYSTEM BOOT 
+================================================== 
+[Tue 12/23/2025 14:36:10.21] ROTATING LOG "C:\V-Docs_Backend\logs\node.log" 

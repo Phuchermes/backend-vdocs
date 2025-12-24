@@ -11,13 +11,18 @@ const authRoutes = require("./routes/auth");
 const documentsRoutes = require("./routes/documents");
 const filesRoutes = require("./routes/files");
 
-dotenv.config();
+require("dotenv").config({ quiet: true });
 
 const app = express();
+app.get('/health', (req, res) => {
+  res.status(200).send('Server is OK');
+});
 
 // ===== Global middlewares =====
 app.use(cors({
-  origin: "*", 
+  origin: [
+    "https://web-v-docs.onrender.com",
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
@@ -38,10 +43,29 @@ app.use("/files", filesRoutes);
 
 // ===== ROOT =====
 app.get("/", (req, res) => {
-  res.send("Server is running OK");
+  res.send("Welcome to storage VIAGS");
 });
-
 
 // ===== Start Server =====
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
+const server = http.createServer(app);
+
+server.keepAliveTimeout = 60000; // 60s
+server.headersTimeout = 65000;
+
+setInterval(() => {
+  console.log("heartbeat", Date.now());
+}, 60000);
+
+server.listen(PORT, '::', () => {
+  console.log(`Server running on port ${PORT} (IPv4 + IPv6)`);
+});
+
+process.on('uncaughtException', err => {
+  console.error(err);
+});
+
+process.on('unhandledRejection', err => {
+  console.error(err);
+});
+

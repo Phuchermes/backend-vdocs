@@ -1,6 +1,6 @@
 const multer = require("multer");
 
-// Lưu file vào memory (buffer)
+// Multer memoryStorage
 const storage = multer.memoryStorage();
 
 const upload = multer({
@@ -14,4 +14,4 @@ const upload = multer({
   },
 });
 
-module.exports = upload; // export trực tiếp multer instance
+module.exports = upload;
