@@ -1,0 +1,272 @@
+[{
+  "_id": {
+    "$oid": "69310158451efccf384a8855"
+  },
+  "title": "Triển khai GPU, ACU thay thế APU tàu thân rộng A350 và B787.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819288089-triecc82cc89n20khai20gpu2c20acu20thay20thecc82cc8120apu20tacc80u20thacc82n20rocca3cc82ng20a35020vacc8020b787.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:48.092Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:48.092Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310158451efccf384a8857"
+  },
+  "title": "Ground Time 55P A350 và B787 (QT ngắn - QT ngắn hoặc NĐ và NĐ-NĐ).pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819288174-ground20time2055p20a35020vacc8020b78720qt20ngacc86cc81n20-20qt20ngacc86cc81n20hoacca3cc86c20nc49020vacc8020nc490-nc490.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:48.175Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:48.175Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310158451efccf384a8859"
+  },
+  "title": "Ground Time 40P A321 (NĐ-NĐ).pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819288247-ground20time2040p20a32120nc490-nc490.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:48.247Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:48.247Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310158451efccf384a885b"
+  },
+  "title": "Nghiệp vụ Loading VNA.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819288301-nghiecca3cc82p20vucca320loading20vna.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:48.303Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:48.303Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310158451efccf384a885d"
+  },
+  "title": "Tiêu chuẩn cắt hành hly VNA A321.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819288366-tiecc82u20chuacc82cc89n20cacc86cc81t20hacc80nh20hly20vna20a321.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:48.368Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:48.368Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310158451efccf384a885f"
+  },
+  "title": "Hàng Nguy Hiểm VNA.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819288698-hacc80ng20nguy20hiecc82cc89m20vna.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:48.699Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:48.699Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310158451efccf384a8861"
+  },
+  "title": "Ground Time 65P A350 và B787 (NĐ hoặc QT Ngắn - QT trung và ngược lại).pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819288806-ground20time2065p20a35020vacc8020b78720nc49020hoacca3cc86c20qt20ngacc86cc81n20-20qt20trung20vacc8020ngucc9bocc9bcca3c20lacca3i.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:48.808Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:48.808Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310158451efccf384a8863"
+  },
+  "title": "Ground Time 75P A350 và B787 (QT trung - QT trung).pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819288860-ground20time2075p20a35020vacc8020b78720qt20trung20-20qt20trung.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:48.862Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:48.862Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310158451efccf384a8865"
+  },
+  "title": "Định Mức Nước Sạch.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819288914-c490icca3nh20mucc9bcc81c20nucc9bocc9bcc81c20sacca3ch.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:48.916Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:48.916Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310158451efccf384a8867"
+  },
+  "title": "Cấp đá khô khi hỏng hệ thống lạnh xe đẩy.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819288962-cacc82cc81p20c491acc8120khocc8220khi20hocc89ng20hecca3cc8220thocc82cc81ng20lacca3nh20xe20c491acc82cc89y.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:48.963Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:48.963Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310159451efccf384a8869"
+  },
+  "title": "Ground Time 45P A321 (QT ngắn và QT ngắn đến NĐ).pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819289042-ground20time2045p20a32120qt20ngacc86cc81n20vacc8020qt20ngacc86cc81n20c491ecc82cc81n20nc490.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:49.043Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:49.043Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310159451efccf384a886b"
+  },
+  "title": "Ground Time 55P A321.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819289115-ground20time2055p20a321.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:49.118Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:49.118Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310159451efccf384a886d"
+  },
+  "title": "Nghiệp vụ COOR VNA.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819289153-nghiecca3cc82p20vucca320coor20vna.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:49.154Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:49.154Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310159451efccf384a886f"
+  },
+  "title": "Gaint 35P VNA A321, A320 NĐ-NĐ.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819289232-gaint2035p20vna20a3212c20a32020nc490-nc490.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:49.233Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:49.233Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310159451efccf384a8871"
+  },
+  "title": "Phục vụ PETC.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819289270-phucca3c20vucca320petc.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:49.270Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:49.270Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310159451efccf384a8873"
+  },
+  "title": "Ground Time 85P A350 và B787 (NĐ hoặc QT - QT dài và ngược lại).pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819289340-ground20time2085p20a35020vacc8020b78720nc49020hoacca3cc86c20qt20-20qt20dacc80i20vacc8020ngucc9bocc9bcca3c20lacca3i.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:49.342Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:49.342Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69310159451efccf384a8875"
+  },
+  "title": "Nhiệt độ tàu bay.pdf",
+  "description": "Tài liệu nội bộ HDCX",
+  "fileName": "1764819289442-nhiecca3cc82t20c491occa3cc8220tacc80u20bay.pdf",
+  "department": "HDCX",
+  "createdAt": {
+    "$date": "2025-12-04T03:34:49.444Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T03:34:49.444Z"
+  },
+  "__v": 0
+}]
