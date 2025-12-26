@@ -30,7 +30,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ===== MongoDB Connect =====
-connectDB();
+async function start() {
+  try {
+    await connectDB();
+
+    app.listen(PORT, () => {
+      console.log(`Server running on ${PORT}`);
+    });
+
+  } catch (err) {
+    console.error(" Startup failed:", err);
+    process.exit(1); // để PM2 restart
+  }
+}
+
+start();
 
 // ===== Static Files =====
 const uploadsPath = path.join(__dirname, "uploads");
