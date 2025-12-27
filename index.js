@@ -1,84 +1,91 @@
+// index.js
+require("dotenv").config();
+
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
-const dotenv = require("dotenv");
 const path = require("path");
 
-// ROUTES
+const connectDB = require("./dbsetup");
+
+// routes
 const authRoutes = require("./routes/auth");
 const documentsRoutes = require("./routes/documents");
 const filesRoutes = require("./routes/files");
 
-require("dotenv").config();
-const connectDB = require("./dbsetup")
-
 const app = express();
-app.get('/health', (req, res) => {
-  res.status(200).send('Server is OK');
+const PORT = process.env.PORT || 3000;
+
+/* ===== Trust proxy (Nginx) ===== */
+app.set("trust proxy", true);
+
+/* ===== Health ===== */
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    pid: process.pid,
+    uptime: process.uptime(),
+    memory: process.memoryUsage().rss
+  });
 });
 
-// ===== Global middlewares =====
+/* ===== Middlewares ===== */
 app.use(cors({
-  origin: [
-    "https://web-v-docs.onrender.com",
-  ],
+  origin: process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(",")
+    : "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// ===== MongoDB Connect =====
-async function start() {
-  try {
-    await connectDB();
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-    app.listen(PORT, () => {
-      console.log(`Server running on ${PORT}`);
-    });
+/* ===== Static uploads (LOCAL DISK) ===== */
+app.use(
+  "/uploads",
+  express.static(path.join(__dirname, "uploads"), {
+    maxAge: "1d",
+    etag: false
+  })
+);
 
-  } catch (err) {
-    console.error(" Startup failed:", err);
-    process.exit(1); // để PM2 restart
-  }
-}
-
-start();
-
-// ===== Static Files =====
-const uploadsPath = path.join(__dirname, "uploads");
-app.use("/uploads", express.static(uploadsPath));
-
-// ===== ROUTES =====
+/* ===== Routes ===== */
 app.use("/api/auth", authRoutes);
 app.use("/api/documents", documentsRoutes);
 app.use("/files", filesRoutes);
 
-// ===== ROOT =====
 app.get("/", (req, res) => {
   res.send("Welcome to storage VIAGS");
 });
 
-// ===== Start Server =====
-const PORT = process.env.PORT || 3000;
+/* ===== Server ===== */
 const server = http.createServer(app);
-
-server.keepAliveTimeout = 60000; // 60s
+server.keepAliveTimeout = 60000;
 server.headersTimeout = 65000;
 
-setInterval(() => {
-  console.log("heartbeat", Date.now());
-}, 60000);
+/* ===== Start ===== */
+(async () => {
+  try {
+    await connectDB();
 
-server.listen(PORT, '::', () => {
-  console.log(`Server running on port ${PORT} (IPv4 + IPv6)`);
+    server.listen(PORT, "0.0.0.0", () => {
+      console.log(
+        `Server listening on ${PORT} | PID ${process.pid}`
+      );
+    });
+  } catch (err) {
+    console.error("Startup failed:", err);
+    process.exit(1);
+  }
+})();
+
+/* ===== Crash handling ===== */
+process.on("unhandledRejection", err => {
+  console.error("UnhandledRejection:", err);
 });
 
-process.on('uncaughtException', err => {
-  console.error(err);
+process.on("uncaughtException", err => {
+  console.error("UncaughtException:", err);
+  process.exit(1); // PM2 restart
 });
-
-process.on('unhandledRejection', err => {
-  console.error(err);
-});
-

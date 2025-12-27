@@ -13,5 +13,11 @@ module.exports = {
         JWT_SECRET: "my_super_secret_key"
       },
     },
+    {
+      name: "cleanup",
+      script: "worker-cleanup.js",
+      exec_mode: "fork",
+      cron_restart: "0 3 * * *"
+    }
   ],
 };

@@ -2,14 +2,14 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/upload");
-const { verifyToken } = require("../middleware/authMiddleware"); // bạn đã có
+const { verifyToken } = require("../middleware/authMiddleware");
 const {
   uploadDocument,
   getDocumentFile,
-  getAllDocuments,
+  getDocumentInfo,
 } = require("../controllers/documentController");
 
-// Upload PDF
+// Upload / replace document
 router.post(
   "/upload",
   verifyToken,
@@ -17,10 +17,10 @@ router.post(
   uploadDocument
 );
 
-// Lấy danh sách PDF
-router.get("/", verifyToken, getAllDocuments);
+// Lấy metadata document (title, updatedAt...)
+router.get("/", verifyToken, getDocumentInfo);
 
-// Lấy link WebView PDF
-router.get("/:id", verifyToken, getDocumentFile);
+// Xem PDF (WebView)
+router.get("/file", verifyToken, getDocumentFile);
 
 module.exports = router;
