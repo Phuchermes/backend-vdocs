@@ -122,7 +122,7 @@ exports.getDocumentInfo = async (req, res) => {
     }
 
     const doc = await Document.findOne({});
-    res.json(doc);
+    res.json([doc]);
   } catch (err) {
     console.error("Get document info error:", err);
     res.status(500).json({ error: "Server error" });
