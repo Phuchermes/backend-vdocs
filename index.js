@@ -1,17 +1,16 @@
 const express = require("express");
 const http = require("http");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
-const connectDB = require("./dbsetup")
 
 // ROUTES
 const authRoutes = require("./routes/auth");
 const documentsRoutes = require("./routes/documents");
 const filesRoutes = require("./routes/files");
 
-require("dotenv").config({ quiet: true });
+require("dotenv").config();
+const connectDB = require("./dbsetup")
 
 const app = express();
 app.get('/health', (req, res) => {
