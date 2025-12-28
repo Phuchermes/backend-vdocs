@@ -1,16 +1,8 @@
 const path = require("path");
 const fs = require("fs");
 const Document = require("../models/Document");
+const { runUploadWorker } = require("../services/uploadQueue");
 
-// Slugify tên file
-const slugify = (text) => 
-  text
-    .normalize("NFD")                // tách dấu
-    .replace(/[\u0300-\u036f]/g, "") // bỏ dấu
-    .replace(/\s+/g, "_")            // space → _
-    .replace(/[^\w\-\.]+/g, "")      // chỉ bỏ ký tự lạ, **giữ .**
-    .toLowerCase();
-    
 // Folder lưu file PDF
 const baseDir = path.join(__dirname, "../uploads/documents");
 if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir, { recursive: true });
@@ -18,34 +10,38 @@ if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir, { recursive: true });
 // Upload PDF
 const uploadDocument = async (req, res) => {
   try {
-    if (req.user.department !== "HDCX")
+    if (req.user.department !== "HDCX") {
       return res.status(403).json({ error: "Không có quyền" });
+    }
 
-    if (!req.file)
+    if (!req.file) {
       return res.status(400).json({ error: "Không có file" });
+    }
 
-    // Tạo tên file
-    const fileName = `${Date.now()}-${slugify(req.file.originalname)}`;
-    const filePath = path.join(baseDir, fileName);
-
-    // Ghi buffer ra disk
-    fs.writeFileSync(filePath, req.file.buffer);
-
-    // Lưu MongoDB
-    const doc = await Document.create({
+    // ĐẨY JOB – KHÔNG BLOCK
+    runUploadWorker({
+      type: "document",
+      tmpPath: req.file.path,
+      filename: req.file.filename,
       title: req.body.title || req.file.originalname,
       description: req.body.description || "",
-      fileName,
-      publicUrl: `/uploads/documents/${fileName}`,
       department: "HDCX",
+    }).catch(err => {
+      console.error("Document worker failed:", err);
     });
 
-    res.json({ success: true, document: doc });
+    // TRẢ NGAY
+    res.json({
+      success: true,
+      message: "Đã nhận tài liệu, đang xử lý",
+    });
   } catch (err) {
-    console.error("Upload error:", err);
-    res.status(500).json({ error: "Upload lỗi", details: err.message });
+    console.error("Upload document error:", err);
+    res.status(500).json({ error: "Upload lỗi" });
   }
 };
+
+module.exports = { uploadDocument };
 
 // Lấy file PDF
 const getDocumentFile = async (req, res) => {

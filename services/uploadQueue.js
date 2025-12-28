@@ -6,7 +6,7 @@ function runUploadWorker(job) {
     const worker = fork(
       path.join(__dirname, "../workers/uploadWorker.js"),
       [],
-      { stdio: ["inherit", "inherit", "inherit", "ipc"] }
+      { env: process.env, stdio: ["inherit", "inherit", "inherit", "ipc"] }
     );
 
     worker.send(job);

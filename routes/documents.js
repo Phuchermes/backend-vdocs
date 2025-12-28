@@ -10,12 +10,7 @@ const {
 } = require("../controllers/documentController");
 
 // Upload PDF
-router.post(
-  "/upload",
-  verifyToken,
-  upload.single("file"),
-  uploadDocument
-);
+router.post("/upload", verifyToken, upload.single("file"), uploadDocument);
 
 // Lấy danh sách PDF
 router.get("/", verifyToken, getAllDocuments);
