@@ -18,7 +18,8 @@ module.exports = {
       node_args: "--max-old-space-size=384",
       
       env: {
-        NODE_ENV: "production"
+        NODE_ENV: "production",
+        PORT: 3000
       },
       merge_logs: true,
       log_date_format: "YYYY-MM-DD HH:mm:ss"
