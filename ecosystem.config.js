@@ -5,17 +5,14 @@ module.exports = {
       script: "./index.js",
       cwd: "/var/www/backend-vdocs",
       
-      exec_mode: "cluster",
-      instances: "2",
+      exec_mode: "fork",
+      instances: "1",
 
       max_memory_restart: "512M",
       autorestart: true,
 
-      listen_timeout: 8000,
-      kill_timeout: 10000,
-
-      watch: false,
       node_args: "--max-old-space-size=384",
+      watch: false,
       
       env: {
         NODE_ENV: "production",
