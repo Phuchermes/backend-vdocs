@@ -63,6 +63,7 @@ app.get("/", (req, res) => {
 const server = http.createServer(app);
 server.keepAliveTimeout = 60000;
 server.headersTimeout = 65000;
+server.requestTimeout = 60000;
 
 /* ===== Start ===== */
 (async () => {
@@ -83,9 +84,15 @@ server.headersTimeout = 65000;
 /* ===== Crash handling ===== */
 process.on("unhandledRejection", err => {
   console.error("UnhandledRejection:", err);
+  process.exit(1);
 });
 
 process.on("uncaughtException", err => {
   console.error("UncaughtException:", err);
   process.exit(1); // PM2 restart
+});
+
+process.on("SIGTERM", () => {
+  console.log("SIGTERM received");
+  server.close(() => process.exit(0));
 });
