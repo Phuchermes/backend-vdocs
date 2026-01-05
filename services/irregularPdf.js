@@ -23,14 +23,8 @@ exports.generateIrregularPDF = async ({
 
   const pdfDoc = await PDFDocument.load(pdfBytes);
   pdfDoc.registerFontkit(fontkit);
-  const fontBase64 = await FileSystem.readAsStringAsync(fontPath, {
-      encoding: FileSystem.EncodingType.Base64,
-    });
-
-    const fontUint8 = Uint8Array.from(atob(fontBase64), (c) =>
-      c.charCodeAt(0)
-    );
-  const font = await pdfDoc.embedFont(fontUint8);
+  
+  const font = await pdfDoc.embedFont(fontBytes, { subset: false });
 
   const form = pdfDoc.getForm();
   form.flatten();
@@ -39,14 +33,8 @@ exports.generateIrregularPDF = async ({
   const { height } = page.getSize();
     const fontSize = 15;
     const safeText = (v) => (v ? String(v) : "");
-
-    page.drawRectangle({
-  x: 0,
-  y: 0,
-  borderWidth: 5,
-});
     
-page.drawText("TEST-123", {
+page.drawText("Tiếng Việt: Đặng Văn Khoa – thử nghiệm", {
   x: 50,
   y: height - 50,
   size: 40,
