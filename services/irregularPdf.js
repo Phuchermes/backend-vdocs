@@ -38,6 +38,7 @@ page.drawText("Tiếng Việt: Đặng Văn Khoa – thử nghiệm", {
   x: 50,
   y: height - 50,
   size: 40,
+  font
 });
 
 
