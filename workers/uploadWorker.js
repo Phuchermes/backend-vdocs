@@ -55,8 +55,8 @@ process.on("message", async (job) => {
   const formData = JSON.parse(job.meta.formData || "{}");
   const checkboxes = JSON.parse(job.meta.checkboxes || "{}");
 
-    let sig1Buffer = signatures.sig1 ? fs.readFileSync(signatures.sig1.tmpPath) : null;
-    let sig2Buffer = signatures.sig2 ? fs.readFileSync(signatures.sig2.tmpPath) : null;
+    let sig1Buffer = signature1.sig1 ? fs.readFileSync(signature1.sig1.tmpPath) : null;
+    let sig2Buffer = signature2.sig2 ? fs.readFileSync(signature2.sig2.tmpPath) : null;
 
   const pdfPath = path.join(targetDir, "irregular.pdf");
 

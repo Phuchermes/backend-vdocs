@@ -81,15 +81,15 @@ exports.generateIrregularPDF = async ({
     page.drawText(safeText("X"), { x: 526, y: height - 114, size: 14, font });
 
   // signatures
-  if (signatures.sig1) {
-    const buffer = signatures.sig1.buffer || fs.readFileSync(signatures.sig1.path);
+  if (signature1.sig1) {
+    const buffer = signature1.sig1.buffer || fs.readFileSync(signature2.sig1.path);
     const img = await pdfDoc.embedPng(buffer);
     const s = img.scale(0.07);
     page.drawImage(img, { x: 230, y: -8, ...s });
   }
 
-  if (signatures.sig2) {
-    const buffer = signatures.sig2.buffer || fs.readFileSync(signatures.sig2.path);
+  if (signature2.sig2) {
+    const buffer = signature2.sig2.buffer || fs.readFileSync(signature2.sig2.path);
     const img = await pdfDoc.embedPng(buffer);
     const s = img.scale(0.07);
     page.drawImage(img, { x: 390, y: -8, ...s });
