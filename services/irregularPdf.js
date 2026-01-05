@@ -61,6 +61,8 @@ exports.generateIrregularPDF = async ({
   if (checkboxes.leaking) page.getCheckBox("leaking").check();
   if (checkboxes.other) page.getCheckBox("other").check();
 
+  page.updateFieldAppearances(font);
+
   // signatures
   if (signatures.sig1) {
     const img = await pdfDoc.embedPng(signatures.sig1.buffer);
