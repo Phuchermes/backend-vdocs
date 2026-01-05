@@ -15,10 +15,6 @@ exports.generateIrregularPDF = async ({
     __dirname,
     "../assets/784708725.pdf"
   );
-//   const fontPath = path.join(
-//     __dirname,
-//     "../assets/NotoSans-Regular.ttf"
-//   );
 
   const pdfBytes = fs.readFileSync(templatePath);
   const fontBytes = fs.readFileSync(fontPath);
@@ -45,42 +41,91 @@ exports.generateIrregularPDF = async ({
 // });
 
 
-    page.drawText(safeText(formData.location), { x: 120, y: height - 226, size: fontSize, font });
-    page.drawText(safeText(formData.time), { x: 90, y: height - 166, size: fontSize, font });
-    page.drawText(safeText(formData.day), { x: 225, y: height - 166, size: fontSize, font });
-    page.drawText(safeText(formData.month), { x: 305, y: height - 166, size: fontSize, font });
-    page.drawText(safeText(formData.year), { x: 380, y: height - 166, size: fontSize, font });
+//     page.drawText(safeText(formData.location), { x: 120, y: height - 226, size: fontSize, font });
+//     page.drawText(safeText(formData.time), { x: 90, y: height - 166, size: fontSize, font });
+//     page.drawText(safeText(formData.day), { x: 225, y: height - 166, size: fontSize, font });
+//     page.drawText(safeText(formData.month), { x: 305, y: height - 166, size: fontSize, font });
+//     page.drawText(safeText(formData.year), { x: 380, y: height - 166, size: fontSize, font });
 
-    page.drawText(safeText(formData.name1), { x: 90, y: height - 300, size: fontSize, font });
-    page.drawText(safeText(formData.name2), { x: 90, y: height - 330, size: fontSize, font });
-    page.drawText(safeText(formData.dept1), { x: 440, y: height - 300, size: fontSize, font });
-    page.drawText(safeText(formData.dept2), { x: 440, y: height - 330, size: fontSize, font });
+//     page.drawText(safeText(formData.name1), { x: 90, y: height - 300, size: fontSize, font });
+//     page.drawText(safeText(formData.name2), { x: 90, y: height - 330, size: fontSize, font });
+//     page.drawText(safeText(formData.dept1), { x: 440, y: height - 300, size: fontSize, font });
+//     page.drawText(safeText(formData.dept2), { x: 440, y: height - 330, size: fontSize, font });
 
-    page.drawText(safeText(formData.info), { x: 210, y: height - 370, size: fontSize, font });
-    page.drawText(safeText(formData.tag), { x: 92, y: height - 401, size: fontSize, font });
+//     page.drawText(safeText(formData.info), { x: 210, y: height - 370, size: fontSize, font });
+//     page.drawText(safeText(formData.tag), { x: 92, y: height - 401, size: fontSize, font });
 
-    page.drawText(safeText(formData.location), { x: 145, y: height - 434, size: fontSize, font });
-    page.drawText(safeText(formData.from), { x: 280, y: height - 434, size: fontSize, font });
-    page.drawText(safeText(formData.to), { x: 420, y: height - 434, size: fontSize, font });
+//     page.drawText(safeText(formData.location), { x: 145, y: height - 434, size: fontSize, font });
+//     page.drawText(safeText(formData.from), { x: 280, y: height - 434, size: fontSize, font });
+//     page.drawText(safeText(formData.to), { x: 420, y: height - 434, size: fontSize, font });
 
-    page.drawText(safeText(formData.info), { x: 90, y: height - 467, size: fontSize, font });
-    page.drawText(safeText(formData.cause), { x: 100, y: height - 500, size: fontSize, font });
-    page.drawText(safeText(formData.resolve), { x: 180, y: height - 535, size: fontSize, font });
+//     page.drawText(safeText(formData.info), { x: 90, y: height - 467, size: fontSize, font });
+//     page.drawText(safeText(formData.cause), { x: 100, y: height - 500, size: fontSize, font });
+//     page.drawText(safeText(formData.resolve), { x: 180, y: height - 535, size: fontSize, font });
 
-    page.drawText(safeText(formData.rep), { x: 228, y: height - 602, size: fontSize, font });
+//     page.drawText(safeText(formData.rep), { x: 228, y: height - 602, size: fontSize, font });
 
-    page.drawText(safeText(formData.dept1), { x: 280, y: height - 682, size: fontSize, font });
-    page.drawText(safeText(formData.dept2), { x: 450, y: height - 682, size: fontSize, font });
+//     page.drawText(safeText(formData.dept1), { x: 280, y: height - 682, size: fontSize, font });
+//     page.drawText(safeText(formData.dept2), { x: 450, y: height - 682, size: fontSize, font });
 
-  // checkbox
-  if (checkboxes.damaged)
-    page.drawText(safeText("X"), { x: 178, y: height - 114, size: 14, font });
-  if (checkboxes.wet)
-    page.drawText(safeText("X"), { x: 294, y: height - 114, size: 14, font });
-  if (checkboxes.leaking)
-    page.drawText(safeText("X"), { x: 420, y: height - 114, size: 14, font });
-  if (checkboxes.other)
-    page.drawText(safeText("X"), { x: 526, y: height - 114, size: 14, font });
+//   // checkbox
+//   if (checkboxes.damaged)
+//     page.drawText(safeText("X"), { x: 178, y: height - 114, size: 14, font });
+//   if (checkboxes.wet)
+//     page.drawText(safeText("X"), { x: 294, y: height - 114, size: 14, font });
+//   if (checkboxes.leaking)
+//     page.drawText(safeText("X"), { x: 420, y: height - 114, size: 14, font });
+//   if (checkboxes.other)
+//     page.drawText(safeText("X"), { x: 526, y: height - 114, size: 14, font });
+
+  // ===== DRAW TEXT TIẾNG VIỆT =====
+  const textFields = [
+    { key: "location", x: 120, y: height - 226 },
+    { key: "time", x: 90, y: height - 166 },
+    { key: "day", x: 225, y: height - 166 },
+    { key: "month", x: 305, y: height - 166 },
+    { key: "year", x: 380, y: height - 166 },
+    { key: "name1", x: 90, y: height - 300 },
+    { key: "name2", x: 90, y: height - 330 },
+    { key: "dept1", x: 440, y: height - 300 },
+    { key: "dept2", x: 440, y: height - 330 },
+    { key: "info", x: 210, y: height - 370 },
+    { key: "tag", x: 92, y: height - 401 },
+    { key: "from", x: 280, y: height - 434 },
+    { key: "to", x: 420, y: height - 434 },
+    { key: "cause", x: 100, y: height - 500 },
+    { key: "resolve", x: 180, y: height - 535 },
+    { key: "rep", x: 228, y: height - 602 },
+  ];
+
+  for (const field of textFields) {
+    const val = safeText(formData[field.key]);
+    if (val) {
+      page.drawText(val, {
+        x: field.x,
+        y: field.y,
+        size: fontSize,
+        font,
+        color: rgb(0, 0, 0),
+        maxWidth: 500,
+      });
+    }
+  }
+
+  // ===== DRAW CHECKBOX =====
+  const checkboxMap = {
+    damaged: { x: 178, y: height - 114 },
+    wet: { x: 294, y: height - 114 },
+    leaking: { x: 420, y: height - 114 },
+    other: { x: 526, y: height - 114 },
+  };
+
+  Object.keys(checkboxMap).forEach((key) => {
+    if (checkboxes[key]) {
+      const { x, y } = checkboxMap[key];
+      page.drawText("X", { x, y, size: 14, font, color: rgb(0,0,0) });
+    }
+  });
 
   // signatures
   if (signatures.sig1) {
