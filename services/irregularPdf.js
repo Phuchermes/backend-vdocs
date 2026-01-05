@@ -15,7 +15,7 @@ exports.generateIrregularPDF = async ({
   );
   const fontPath = path.join(
     __dirname,
-    "../assets/Noto-Sans-Regular.ttf"
+    "../assets/NotoSans-Regular.ttf"
   );
 
   const pdfBytes = fs.readFileSync(templatePath);
@@ -35,7 +35,7 @@ exports.generateIrregularPDF = async ({
       const safeText = (v) =>
     typeof v === "string" ? v : v != null ? String(v) : "";
     
-page.drawText("Tiếng Việt: Đặng Văn Khoa – thử nghiệm", {
+page.drawText("Tiếng Việt: Đặng Văn Khoa - thử nghiệm", {
   x: 50,
   y: height - 50,
   size: 40,
