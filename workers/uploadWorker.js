@@ -55,17 +55,20 @@ process.on("message", async (job) => {
   const formData = JSON.parse(job.meta.formData || "{}");
   const checkboxes = JSON.parse(job.meta.checkboxes || "{}");
 
-    let sig1Buffer = signature1.sig1 ? fs.readFileSync(signature1.sig1.tmpPath) : null;
-    let sig2Buffer = signature2.sig2 ? fs.readFileSync(signature2.sig2.tmpPath) : null;
+  const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
+  const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
+  const images = files.filter(f => !f.originalname.startsWith("__signature"));
 
   const pdfPath = path.join(targetDir, "irregular.pdf");
+  const fontPath = path.join(__dirname, "../assets/NotoSans-Regular.ttf"); 
 
   await generateIrregularPDF({
     formData,
     checkboxes,
     images,
-    signatures: { sig1: sig1Buffer, sig2: sig2Buffer },
+    signatures: { sig1, sig2 },
     outputPath: pdfPath,
+    fontPath,
   });
 
   const stat = await fs.promises.stat(pdfPath);

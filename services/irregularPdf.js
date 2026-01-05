@@ -6,8 +6,10 @@ const fontkit = require("@pdf-lib/fontkit");
 exports.generateIrregularPDF = async ({
   formData,
   checkboxes,
+  images,
   signatures,
   outputPath,
+  fontPath
 }) => {
   const templatePath = path.join(
     __dirname,
@@ -81,18 +83,13 @@ exports.generateIrregularPDF = async ({
     page.drawText(safeText("X"), { x: 526, y: height - 114, size: 14, font });
 
   // signatures
-  if (signature1.sig1) {
-    const buffer = signature1.sig1.buffer || fs.readFileSync(signature2.sig1.path);
-    const img = await pdfDoc.embedPng(buffer);
-    const s = img.scale(0.07);
-    page.drawImage(img, { x: 230, y: -8, ...s });
+  if (signatures.sig1) {
+    const img = await pdfDoc.embedPng(fs.readFileSync(signatures.sig1.tmpPath));
+    page.drawImage(img, { x: 230, y: -8, width: img.width * 0.07, height: img.height * 0.07 });
   }
-
-  if (signature2.sig2) {
-    const buffer = signature2.sig2.buffer || fs.readFileSync(signature2.sig2.path);
-    const img = await pdfDoc.embedPng(buffer);
-    const s = img.scale(0.07);
-    page.drawImage(img, { x: 390, y: -8, ...s });
+  if (signatures.sig2) {
+    const img = await pdfDoc.embedPng(fs.readFileSync(signatures.sig2.tmpPath));
+    page.drawImage(img, { x: 390, y: -8, width: img.width * 0.07, height: img.height * 0.07 });
   }
 
   const out = await pdfDoc.save();
