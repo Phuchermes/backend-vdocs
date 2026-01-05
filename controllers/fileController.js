@@ -110,6 +110,12 @@ exports.saveFile = async (req, res) => {
       files,
       type,
       batch,
+       meta: type === "irregular"
+    ? {
+        formData: req.body.formData,
+        checkboxes: req.body.checkboxes,
+      }
+    : undefined,
     }).catch(err => {
       console.error("Worker upload failed:", err);
     });
