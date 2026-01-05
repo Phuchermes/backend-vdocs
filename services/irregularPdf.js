@@ -35,12 +35,12 @@ exports.generateIrregularPDF = async ({
       const safeText = (v) =>
     typeof v === "string" ? v : v != null ? String(v) : "";
     
-page.drawText("Tiếng Việt: Đặng Văn Khoa - thử nghiệm", {
-  x: 50,
-  y: height - 50,
-  size: 40,
-  font
-});
+// page.drawText("Tiếng Việt: Đặng Văn Khoa - thử nghiệm", {
+//   x: 50,
+//   y: height - 50,
+//   size: 40,
+//   font
+// });
 
 
     page.drawText(safeText(formData.location), { x: 120, y: height - 226, size: fontSize, font });
@@ -82,12 +82,14 @@ page.drawText("Tiếng Việt: Đặng Văn Khoa - thử nghiệm", {
 
   // signatures
   if (signatures.sig1) {
+    const buffer = signatures.sig1.buffer || fs.readFileSync(signatures.sig1.path);
     const img = await pdfDoc.embedPng(signatures.sig1.buffer);
     const s = img.scale(0.07);
     page.drawImage(img, { x: 230, y: -8, ...s });
   }
 
   if (signatures.sig2) {
+    const buffer = signatures.sig2.buffer || fs.readFileSync(signatures.sig2.path);
     const img = await pdfDoc.embedPng(signatures.sig2.buffer);
     const s = img.scale(0.07);
     page.drawImage(img, { x: 390, y: -8, ...s });
