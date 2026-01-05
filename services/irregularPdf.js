@@ -32,7 +32,8 @@ exports.generateIrregularPDF = async ({
   const page = pdfDoc.getPages()[0];
   const { height } = page.getSize();
     const fontSize = 15;
-    const safeText = (v) => (v ? String(v) : "");
+      const safeText = (v) =>
+    typeof v === "string" ? v : v != null ? String(v) : "";
     
 page.drawText("Tiếng Việt: Đặng Văn Khoa – thử nghiệm", {
   x: 50,
