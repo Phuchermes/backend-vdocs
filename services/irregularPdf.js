@@ -21,7 +21,7 @@ exports.generateIrregularPDF = async ({
   const pdfBytes = fs.readFileSync(templatePath);
   const fontBytes = fs.readFileSync(fontPath);
 
-  const pdfDoc = await PDFDocument.create();
+  const pdfDoc = await PDFDocument.load(pdfBytes);
   pdfDoc.registerFontkit(fontkit);
   
   const font = await pdfDoc.embedFont(fontBytes, { subset: false });
