@@ -33,7 +33,19 @@ exports.generateIrregularPDF = async ({
     const fontSize = 15;
     const safeText = (v) => (v ? String(v) : "");
 
-    page.getFiels
+    page.drawRectangle({
+  x: 0,
+  y: 0,
+  borderWidth: 5,
+});
+    
+page.drawText("TEST-123", {
+  x: 50,
+  y: height - 50,
+  size: 40,
+});
+
+console.log("ROTATE:", page.getRotation().angle);
 
     page.drawText(safeText(formData.location), { x: 120, y: height - 226, size: fontSize, font });
     page.drawText(safeText(formData.time), { x: 90, y: height - 166, size: fontSize, font });
