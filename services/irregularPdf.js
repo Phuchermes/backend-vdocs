@@ -15,10 +15,10 @@ exports.generateIrregularPDF = async ({
     __dirname,
     "../assets/784708725.pdf"
   );
-  const fontPath = path.join(
-    __dirname,
-    "../assets/NotoSans-Regular.ttf"
-  );
+//   const fontPath = path.join(
+//     __dirname,
+//     "../assets/NotoSans-Regular.ttf"
+//   );
 
   const pdfBytes = fs.readFileSync(templatePath);
   const fontBytes = fs.readFileSync(fontPath);
