@@ -83,14 +83,14 @@ exports.generateIrregularPDF = async ({
   // signatures
   if (signatures.sig1) {
     const buffer = signatures.sig1.buffer || fs.readFileSync(signatures.sig1.path);
-    const img = await pdfDoc.embedPng(signatures.sig1.buffer);
+    const img = await pdfDoc.embedPng(buffer);
     const s = img.scale(0.07);
     page.drawImage(img, { x: 230, y: -8, ...s });
   }
 
   if (signatures.sig2) {
     const buffer = signatures.sig2.buffer || fs.readFileSync(signatures.sig2.path);
-    const img = await pdfDoc.embedPng(signatures.sig2.buffer);
+    const img = await pdfDoc.embedPng(buffer);
     const s = img.scale(0.07);
     page.drawImage(img, { x: 390, y: -8, ...s });
   }

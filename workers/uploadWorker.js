@@ -55,11 +55,8 @@ process.on("message", async (job) => {
   const formData = JSON.parse(job.meta.formData || "{}");
   const checkboxes = JSON.parse(job.meta.checkboxes || "{}");
 
-  const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
-  const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
-  const images = files.filter(
-    f => !f.originalname.startsWith("__signature")
-  );
+    let sig1Buffer = signatures.sig1 ? fs.readFileSync(signatures.sig1.tmpPath) : null;
+    let sig2Buffer = signatures.sig2 ? fs.readFileSync(signatures.sig2.tmpPath) : null;
 
   const pdfPath = path.join(targetDir, "irregular.pdf");
 
@@ -67,7 +64,7 @@ process.on("message", async (job) => {
     formData,
     checkboxes,
     images,
-    signatures: { sig1, sig2 },
+    signatures: { sig1: sig1Buffer, sig2: sig2Buffer },
     outputPath: pdfPath,
   });
 

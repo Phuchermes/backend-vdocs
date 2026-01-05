@@ -105,8 +105,17 @@ exports.saveFile = async (req, res) => {
       uploadedBy: req.user._id,
     }));
 
+    // signatures
+    const signatures = {};
+    if (req.files.find(f => f.originalname.startsWith("__signature1"))) {
+      signatures.sig1 = req.files.find(f => f.originalname.startsWith("__signature1"));
+    }
+    if (req.files.find(f => f.originalname.startsWith("__signature2"))) {
+      signatures.sig2 = req.files.find(f => f.originalname.startsWith("__signature2"));
+    }
+
     // GỬI JOB – KHÔNG BLOCK
-    runUploadWorker({
+    await runUploadWorker({
       files,
       type,
       batch,
