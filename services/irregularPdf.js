@@ -28,40 +28,46 @@ exports.generateIrregularPDF = async ({
   const page = pdfDoc.getPages()[0];
   const { height } = page.getSize();
     const fontSize = 15;
-    const safe = (v) => (v ? String(v) : "");
+    const safeText = (v) => (v ? String(v) : "");
 
-  page.getTextField("location").setText(safe(formData.location));
-  page.getTextField("time").setText(safe(formData.time));
-  page.getTextField("day").setText(safe(formData.day));
-  page.getTextField("month").setText(safe(formData.month));
-  page.getTextField("year").setText(safe(formData.year));
+    page.getFiels
 
-    page.getTextField("name1").setText(safe(formData.name1));
-  page.getTextField("name2").setText(safe(formData.name2));
-  page.getTextField("dept1").setText(safe(formData.dept1));
-  page.getTextField("dept2").setText(safe(formData.dept2));
+    page.drawText(safeText(formData.location), { x: 120, y: height - 226, size: fontSize, font });
+    page.drawText(safeText(formData.time), { x: 90, y: height - 166, size: fontSize, font });
+    page.drawText(safeText(formData.day), { x: 225, y: height - 166, size: fontSize, font });
+    page.drawText(safeText(formData.month), { x: 305, y: height - 166, size: fontSize, font });
+    page.drawText(safeText(formData.year), { x: 380, y: height - 166, size: fontSize, font });
 
-     page.getTextField("info").setText(safe(formData.info));
-  page.getTextField("tag").setText(safe(formData.tag));
+    page.drawText(safeText(formData.name1), { x: 90, y: height - 300, size: fontSize, font });
+    page.drawText(safeText(formData.name2), { x: 90, y: height - 330, size: fontSize, font });
+    page.drawText(safeText(formData.dept1), { x: 440, y: height - 300, size: fontSize, font });
+    page.drawText(safeText(formData.dept2), { x: 440, y: height - 330, size: fontSize, font });
 
-    page.getTextField("location").setText(safe(formData.location));
-     page.getTextField("from").setText(safe(formData.from));
-  page.getTextField("to").setText(safe(formData.to));
+    page.drawText(safeText(formData.info), { x: 210, y: height - 370, size: fontSize, font });
+    page.drawText(safeText(formData.tag), { x: 92, y: height - 401, size: fontSize, font });
 
-     page.getTextField("cause").setText(safe(formData.cause));
-  page.getTextField("resolve").setText(safe(formData.resolve));
-  page.getTextField("rep").setText(safe(formData.rep));
+    page.drawText(safeText(formData.location), { x: 145, y: height - 434, size: fontSize, font });
+    page.drawText(safeText(formData.from), { x: 280, y: height - 434, size: fontSize, font });
+    page.drawText(safeText(formData.to), { x: 420, y: height - 434, size: fontSize, font });
 
-    page.getTextField("dept1").setText(safe(formData.dept1));
-  page.getTextField("dept2").setText(safe(formData.dept2));
+    page.drawText(safeText(formData.info), { x: 90, y: height - 467, size: fontSize, font });
+    page.drawText(safeText(formData.cause), { x: 100, y: height - 500, size: fontSize, font });
+    page.drawText(safeText(formData.resolve), { x: 180, y: height - 535, size: fontSize, font });
+
+    page.drawText(safeText(formData.rep), { x: 228, y: height - 602, size: fontSize, font });
+
+    page.drawText(safeText(formData.dept1), { x: 280, y: height - 682, size: fontSize, font });
+    page.drawText(safeText(formData.dept2), { x: 450, y: height - 682, size: fontSize, font });
 
   // checkbox
-   if (checkboxes.damaged) page.getCheckBox("damages").check();
-  if (checkboxes.wet) page.getCheckBox("wet").check();
-  if (checkboxes.leaking) page.getCheckBox("leaking").check();
-  if (checkboxes.other) page.getCheckBox("other").check();
-
-  page.updateFieldAppearances(font);
+  if (checkboxes.damaged)
+    page.drawText(safeText("X"), { x: 178, y: height - 114, size: 14, font });
+  if (checkboxes.wet)
+    page.drawText(safeText("X"), { x: 294, y: height - 114, size: 14, font });
+  if (checkboxes.leaking)
+    page.drawText(safeText("X"), { x: 420, y: height - 114, size: 14, font });
+  if (checkboxes.other)
+    page.drawText(safeText("X"), { x: 526, y: height - 114, size: 14, font });
 
   // signatures
   if (signatures.sig1) {
