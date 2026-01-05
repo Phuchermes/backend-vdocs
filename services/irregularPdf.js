@@ -23,7 +23,14 @@ exports.generateIrregularPDF = async ({
 
   const pdfDoc = await PDFDocument.load(pdfBytes);
   pdfDoc.registerFontkit(fontkit);
-  const font = await pdfDoc.embedFont(fontBytes);
+  const fontBase64 = await FileSystem.readAsStringAsync(fontPath, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+
+    const fontUint8 = Uint8Array.from(atob(fontBase64), (c) =>
+      c.charCodeAt(0)
+    );
+  const font = await pdfDoc.embedFont(fontUint8);
 
   const form = pdfDoc.getForm();
   form.flatten();
