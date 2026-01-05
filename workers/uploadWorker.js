@@ -87,6 +87,39 @@ if (type === "irregular" && job.meta) {
     const targetDir = path.join(BASE_DIR, type, String(batch));
     await ensureDir(targetDir);
 
+    if (type === "irregular" && job.meta) {
+  const formData = JSON.parse(job.meta.formData || "{}");
+  const checkboxes = JSON.parse(job.meta.checkboxes || "{}");
+
+  const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
+  const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
+  const images = files.filter(
+    f => !f.originalname.startsWith("__signature")
+  );
+
+  const pdfPath = path.join(targetDir, "irregular.pdf");
+
+  await generateIrregularPDF({
+    formData,
+    checkboxes,
+    images,
+    signatures: { sig1, sig2 },
+    outputPath: pdfPath,
+  });
+
+  const stat = await fs.promises.stat(pdfPath);
+  await File.create({
+    filename: "irregular.pdf",
+    path: `${type}/${batch}/irregular.pdf`,
+    mimetype: "application/pdf",
+    size: stat.size,
+    uploadedBy: files[0].uploadedBy,
+    department: files[0].department,
+    targetDept: files[0].targetDept,
+    batch,
+  });
+}
+
     for (const f of files) {
       const finalPath = path.join(targetDir, f.filename);
       await fs.promises.rename(f.tmpPath, finalPath);
