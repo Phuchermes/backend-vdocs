@@ -15,7 +15,7 @@ exports.generateIrregularPDF = async ({
   );
   const fontPath = path.join(
     __dirname,
-    "../assets/Roboto-Regular.ttf"
+    "../assets/Noto-Sans-Regular.ttf"
   );
 
   const pdfBytes = fs.readFileSync(templatePath);
@@ -40,7 +40,6 @@ page.drawText("Tiếng Việt: Đặng Văn Khoa – thử nghiệm", {
   size: 40,
 });
 
-console.log("ROTATE:", page.getRotation().angle);
 
     page.drawText(safeText(formData.location), { x: 120, y: height - 226, size: fontSize, font });
     page.drawText(safeText(formData.time), { x: 90, y: height - 166, size: fontSize, font });
