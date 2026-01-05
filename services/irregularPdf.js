@@ -25,6 +25,9 @@ exports.generateIrregularPDF = async ({
   pdfDoc.registerFontkit(fontkit);
   const font = await pdfDoc.embedFont(fontBytes);
 
+  const form = pdfDoc.getForm();
+  form.flatten();
+
   const page = pdfDoc.getPages()[0];
   const { height } = page.getSize();
     const fontSize = 15;
@@ -81,8 +84,6 @@ exports.generateIrregularPDF = async ({
     const s = img.scale(0.07);
     page.drawImage(img, { x: 390, y: -8, ...s });
   }
-
-  page.flatten();
 
   const out = await pdfDoc.save();
   fs.writeFileSync(outputPath, out);
