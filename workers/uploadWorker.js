@@ -44,40 +44,40 @@ process.on("message", async (job) => {
       process.exit(0);
     }
 
-    /* ===== IRREGULAR PDF (ADD-ON, KHÔNG PHÁ) ===== */
-if (type === "irregular" && job.meta) {
-  const formData = JSON.parse(job.meta.formData || "{}");
-  const checkboxes = JSON.parse(job.meta.checkboxes || "{}");
+//     /* ===== IRREGULAR PDF (ADD-ON, KHÔNG PHÁ) ===== */
+// if (type === "irregular" && job.meta) {
+//   const formData = JSON.parse(job.meta.formData || "{}");
+//   const checkboxes = JSON.parse(job.meta.checkboxes || "{}");
 
-  const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
-  const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
-  const images = files.filter(
-    f => !f.originalname.startsWith("__signature")
-  );
+//   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
+//   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
+//   const images = files.filter(
+//     f => !f.originalname.startsWith("__signature")
+//   );
 
-  const pdfPath = path.join(targetDir, "irregular.pdf");
+//   const pdfPath = path.join(targetDir, "irregular.pdf");
 
-  await generateIrregularPDF({
-    formData,
-    checkboxes,
-    images,
-    signatures: { sig1, sig2 },
-    outputPath: pdfPath,
-  });
+//   await generateIrregularPDF({
+//     formData,
+//     checkboxes,
+//     images,
+//     signatures: { sig1, sig2 },
+//     outputPath: pdfPath,
+//   });
 
-  // insert PDF như file bình thường
-  const stat = await fs.promises.stat(pdfPath);
-  await File.create({
-    filename: "irregular.pdf",
-    path: `${type}/${batch}/irregular.pdf`,
-    mimetype: "application/pdf",
-    size: stat.size,
-    uploadedBy: files[0].uploadedBy,
-    department: files[0].department,
-    targetDept: files[0].targetDept,
-    batch,
-  });
-}
+//   // insert PDF như file bình thường
+//   const stat = await fs.promises.stat(pdfPath);
+//   await File.create({
+//     filename: "irregular.pdf",
+//     path: `${type}/${batch}/irregular.pdf`,
+//     mimetype: "application/pdf",
+//     size: stat.size,
+//     uploadedBy: files[0].uploadedBy,
+//     department: files[0].department,
+//     targetDept: files[0].targetDept,
+//     batch,
+//   });
+// }
 
     /* ======================================================
        ================= FILES UPLOAD ======================
