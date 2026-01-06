@@ -47,10 +47,11 @@ process.on("message", async (job) => {
        ================= FILES UPLOAD ======================
        ====================================================== */
     
- const { files, type, batch } = job;
-
-    
+       const { files, type, batch } = job;
+      const targetDir = path.join(BASE_DIR, type, String(batch));
+    await ensureDir(targetDir);
     if (type === "irregular" && job.meta) {
+      const { files, type, batch } = job;
       const targetDir = path.join(BASE_DIR, type, String(batch));
     await ensureDir(targetDir);
 process.on("message", async (job) => {
