@@ -52,17 +52,14 @@ process.on("message", async (job) => {
     await ensureDir(targetDir);
 
     if (type === "irregular" ) {
-      const metaFile = files.find(f => f.originalname === "meta.json");
-      let formData = {}, checkboxes = {};
-      if (metaFile) {
-        const content = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
-        const meta = JSON.parse(content);
-        formData = meta.formData || {};
-        checkboxes = meta.checkboxes || {};
-      }
+     const metaFile = files.find(f => f.originalname === "meta.json");
+if (!metaFile) throw new Error("Meta file missing!");
 
-      if (!formData || Object.keys(formData).length === 0)
-        throw new Error("formData empty!");
+const metaContent = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
+const { formData, checkboxes, targetDept } = JSON.parse(metaContent);
+
+if (!formData || Object.keys(formData).length === 0)
+  throw new Error("formData empty!");
 
   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
