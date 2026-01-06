@@ -64,16 +64,16 @@ process.on("message", async (job) => {
 
 // const formData = meta.formData || {};
 // const checkboxes = meta.checkboxes || {};
-let meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
+// let meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
 
-      let formData = meta.formData || {};
-      if (typeof formData === "string") formData = JSON.parse(formData);
+//       let formData = meta.formData || {};
+//       if (typeof formData === "string") formData = JSON.parse(formData);
 
-      let checkboxes = meta.checkboxes || {};
-      if (typeof checkboxes === "string") checkboxes = JSON.parse(checkboxes);
+//       let checkboxes = meta.checkboxes || {};
+//       if (typeof checkboxes === "string") checkboxes = JSON.parse(checkboxes);
 
-      if (!formData || Object.keys(formData).length === 0)
-        throw new Error("formData empty!");
+//       if (!formData || Object.keys(formData).length === 0)
+//         throw new Error("formData empty!");
 
 
   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
