@@ -83,7 +83,11 @@ process.on("message", async (job) => {
   });
 }
 
-    for (const f of files) {
+const filesToUpload = files.filter(
+  f => f !== sig1 && f !== sig2
+);
+
+    for (const f of filesToUpload) {
       const finalPath = path.join(targetDir, f.filename);
       await fs.promises.rename(f.tmpPath, finalPath);
 
