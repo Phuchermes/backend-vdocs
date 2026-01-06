@@ -17,7 +17,7 @@ exports.generateIrregularPDF = async ({
   signatures,
   outputPath,
 }) => {
-  if (!formData || Object.keys(formData).length === 0) throw new Error("formData trống!");
+  if (!formData || Object.keys(formData).length === 0) throw new Error("formData empty!");
 
 
   const templatePath = path.join(__dirname,"../assets/784708725.pdf");
