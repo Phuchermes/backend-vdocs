@@ -20,16 +20,26 @@ exports.generateIrregularPDF = async ({
   outputPath,
 }) => {
   
-  let parsedFormData = {};
-try {
-  parsedFormData = typeof formData === "string" ? JSON.parse(formData) : formData;
-} catch(e) {
-  console.error("Cannot parse formData:", formData);
-  throw new Error("formData parse failed!");
+  let meta = {};
+if (job.meta) {
+  // nếu job.meta là string JSON, parse, nếu là object thì dùng luôn
+  meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
 }
 
-if (!parsedFormData || Object.keys(parsedFormData).length === 0)
-  throw new Error("formData empty!");
+// bắt buộc phải parse formData + checkboxes
+let formData = {};
+let checkboxes = {};
+if (meta.formData) {
+  formData = typeof meta.formData === "string" ? JSON.parse(meta.formData) : meta.formData;
+}
+if (meta.checkboxes) {
+  checkboxes = typeof meta.checkboxes === "string" ? JSON.parse(meta.checkboxes) : meta.checkboxes;
+}
+
+if (!formData || Object.keys(formData).length === 0) {
+  console.log("Job meta:", job.meta);
+  throw new Error("formData empty!"); // debug thêm
+}
 
 formData = parsedFormData; // dùng tiếp trong PDF
 
