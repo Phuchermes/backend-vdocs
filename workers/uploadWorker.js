@@ -54,9 +54,10 @@ process.on("message", async (job) => {
     if (type === "irregular" && job.meta) {
 let meta = {};
 try {
-  meta = job.meta ? JSON.parse(job.meta) : {};
+  meta = JSON.parse(job.meta);
 } catch (e) {
   console.error("Meta JSON parse failed:", e);
+  meta={};
 }
 
 const formData = meta.formData || {};
