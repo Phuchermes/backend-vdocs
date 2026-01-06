@@ -5,45 +5,21 @@ const fontkit = require("@pdf-lib/fontkit");
 
 /**
  * @param {Object} options
- * @param {Object} options.formData
- * @param {Object} options.checkboxes
- * @param {Object} options.signatures  signature1, signature2 (base64 hoặc file path)
- * @param {string} options.outputPath
+ *   - formData: { day, month, year, time, location, name1, name2, dept1, dept2, info, tag, from, to, cause, resolve, rep }
+ *   - checkboxes: { damaged, wet, leaking, other }
+ *   - images: [{ path, originalname }]
+ *   - signatures: { sig1: file, sig2: file }
+ *   - outputPath: string
  */
 
 exports.generateIrregularPDF = async ({
   formData,
   checkboxes,
+  images,
   signatures,
   outputPath,
 }) => {
-  const formData = {
-  day: job.body.formData_day,
-  month: job.body.formData_month,
-  year: job.body.formData_year,
-  time: job.body.formData_time,
-  location: job.body.formData_location,
-  name1: job.body.formData_name1,
-  name2: job.body.formData_name2,
-  dept1: job.body.formData_dept1,
-  dept2: job.body.formData_dept2,
-  info: job.body.formData_info,
-  tag: job.body.formData_tag,
-  from: job.body.formData_from,
-  to: job.body.formData_to,
-  cause: job.body.formData_cause,
-  resolve: job.body.formData_resolve,
-  rep: job.body.formData_rep,
-};
-
-const checkboxes = {
-  damaged: job.body.checkbox_damaged === "1",
-  wet: job.body.checkbox_wet === "1",
-  leaking: job.body.checkbox_leaking === "1",
-  other: job.body.checkbox_other === "1",
-};
-
-const targetDept = job.body.targetDept;
+  
   let parsedFormData = {};
 try {
   parsedFormData = typeof formData === "string" ? JSON.parse(formData) : formData;
@@ -75,12 +51,12 @@ formData = parsedFormData; // dùng tiếp trong PDF
       const safeText = (v) =>
     typeof v === "string" ? v : v != null ? String(v) : "";
     
-// page.drawText("Tiếng Việt: Đặng Văn Khoa - thử nghiệm", {
-//   x: 50,
-//   y: height - 50,
-//   size: 40,
-//   font
-// });
+page.drawText("Tiếng Việt: Đặng Văn Khoa - thử nghiệm", {
+  x: 50,
+  y: height - 50,
+  size: 40,
+  font
+});
 
 
     page.drawText(safeText(formData.location), { x: 120, y: height - 226, size: fontSize, font, color: rgb(0,0,0) });
@@ -156,18 +132,18 @@ formData = parsedFormData; // dùng tiếp trong PDF
   // }
 
   // ==== CHECKBOXES ====
-  const checkboxMap = {
-    damaged: { x: 178, y: height - 114 },
-    wet: { x: 294, y: height - 114 },
-    leaking: { x: 420, y: height - 114 },
-    other: { x: 526, y: height - 114 },
-  };
-  Object.keys(checkboxMap).forEach(key => {
-    if (checkboxes[key]) {
-      const { x, y } = checkboxMap[key];
-      page.drawText("X", { x, y, size: 14, font, color: rgb(0,0,0) });
-    }
-  });
+  // const checkboxMap = {
+  //   damaged: { x: 178, y: height - 114 },
+  //   wet: { x: 294, y: height - 114 },
+  //   leaking: { x: 420, y: height - 114 },
+  //   other: { x: 526, y: height - 114 },
+  // };
+  // Object.keys(checkboxMap).forEach(key => {
+  //   if (checkboxes[key]) {
+  //     const { x, y } = checkboxMap[key];
+  //     page.drawText("X", { x, y, size: 14, font, color: rgb(0,0,0) });
+  //   }
+  // });
 
   // signatures
   if (signatures.sig1) {
