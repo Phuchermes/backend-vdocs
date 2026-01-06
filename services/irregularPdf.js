@@ -23,6 +23,7 @@ exports.generateIrregularPDF = async ({
 
   const page = pdfDoc.getPages()[0];
   const { height } = page.getSize();
+  console.log(x, height); 
     const fontSize = 15;
       const safeText = (v) =>
     typeof v === "string" ? v : v != null ? String(v) : "";
