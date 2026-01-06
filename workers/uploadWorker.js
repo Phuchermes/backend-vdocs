@@ -52,49 +52,24 @@ process.on("message", async (job) => {
     await ensureDir(targetDir);
 
     if (type === "irregular" && job.meta) {
-// let meta = {};
-// try {
-//   // job.meta có thể đã là object hoặc string
-//   meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
-// } catch (e) {
-//   console.error("Meta JSON parse failed:", e);
-//   meta = {};
-// }
-// console.log("RAW job.meta:", job.meta);
-
-// const formData = meta.formData || {};
-// const checkboxes = meta.checkboxes || {};
-
-let formData = {};
-let checkboxes = {};
-let targetDept = "";
-
-if (job.meta) {
-  let metaObj;
+process.on("message", async (job) => {
   try {
-    metaObj = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
-  } catch (err) {
-    console.error("Meta JSON parse failed:", job.meta);
-    throw new Error("MetaJson failed: invalid JSON");
-  }
+    // parse meta an toàn
+    let meta = {};
+    if (job.meta) {
+      meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
+    }
 
-  // formData
-  if (metaObj.formData) {
-    formData = typeof metaObj.formData === "string" ? JSON.parse(metaObj.formData) : metaObj.formData;
-  }
+    let formData = {};
+    let checkboxes = {};
+    if (meta.formData) {
+      formData = typeof meta.formData === "string" ? JSON.parse(meta.formData) : meta.formData;
+    }
+    if (meta.checkboxes) {
+      checkboxes = typeof meta.checkboxes === "string" ? JSON.parse(meta.checkboxes) : meta.checkboxes;
+    }
+    if (!formData || Object.keys(formData).length === 0) throw new Error("formData empty!");
   
-  // checkboxes
-  if (metaObj.checkboxes) {
-    checkboxes = typeof metaObj.checkboxes === "string" ? JSON.parse(metaObj.checkboxes) : metaObj.checkboxes;
-  }
-
-  targetDept = metaObj.targetDept || "";
-}
-
-// Bây giờ check
-if (!formData || Object.keys(formData).length === 0)
-  throw new Error("formData empty!");
-
 
   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
@@ -109,6 +84,15 @@ if (!formData || Object.keys(formData).length === 0)
     signatures: { sig1, sig2 },
     outputPath: pdfPath,
   });
+      console.log("PDF generated successfully!", pdfPath);
+    process.send({ success: true });
+    process.exit(0);
+  } catch (err) {
+    console.error("Worker error:", err);
+    process.send({ success: false, error: err.message });
+    process.exit(1);
+  }
+});
 
   const stat = await fs.promises.stat(pdfPath);
   await File.create({
@@ -145,7 +129,9 @@ if (!formData || Object.keys(formData).length === 0)
       console.log("formData.name1:", JSON.stringify(formData.name1));
       console.log("formData received:", formData);
     }
-}
+    
+  }
+
     process.send({ success: true });
     process.exit(0);
   } catch (err) {
