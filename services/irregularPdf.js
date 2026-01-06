@@ -22,8 +22,8 @@ exports.generateIrregularPDF = async ({
   const font = await pdfDoc.embedFont(fontBytes, { subset: false });
 
   const page = pdfDoc.getPages()[0];
-  const { height } = page.getSize();
-  console.log(x, height); 
+  const { width, height } = page.getSize();
+  console.log(width, height); 
     const fontSize = 15;
       const safeText = (v) =>
     typeof v === "string" ? v : v != null ? String(v) : "";
@@ -62,6 +62,7 @@ exports.generateIrregularPDF = async ({
 
     page.drawText(safeText(formData.dept1), { x: 280, y: height - 682, size: fontSize, font, color: rgb(0,0,0) });
     page.drawText(safeText(formData.dept2), { x: 450, y: height - 682, size: fontSize, font, color: rgb(0,0,0) });
+    
 
   // checkbox
   if (checkboxes.damaged)
