@@ -12,7 +12,7 @@ const fontkit = require("@pdf-lib/fontkit");
  *   - outputPath: string
  */
 
-exports.generateIrregularPDF = async ({
+exports.generateULDPDF = async ({
   formData,
   checkboxes,
   images,

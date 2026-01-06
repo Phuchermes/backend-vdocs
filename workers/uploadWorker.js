@@ -6,6 +6,8 @@ require("dotenv").config();
 const File = require("../models/File");
 const Document = require("../models/Document");
 const { generateIrregularPDF } = require("../services/irregularPdf");
+const { generateULDPDF } = require("../services/uldPdf");
+const { generateKHPDF } = require("../services/khPdf");
 
 const BASE_DIR = path.join(__dirname, "../uploads");
 
@@ -52,14 +54,14 @@ process.on("message", async (job) => {
     await ensureDir(targetDir);
 
     if (type === "irregular" ) {
-     const metaFile = files.find(f => f.originalname === "meta.json");
-if (!metaFile) throw new Error("Meta file missing!");
+      const metaFile = files.find(f => f.originalname === "meta.json");
+      if (!metaFile) throw new Error("Meta file missing!");
 
-const metaContent = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
-const { formData, checkboxes, targetDept } = JSON.parse(metaContent);
+      const metaContent = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
+      const { formData, checkboxes } = JSON.parse(metaContent);
 
-if (!formData || Object.keys(formData).length === 0)
-  throw new Error("formData empty!");
+        if (!formData || Object.keys(formData).length === 0)
+          throw new Error("formData empty!");
 
   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
@@ -86,8 +88,7 @@ if (!formData || Object.keys(formData).length === 0)
     targetDept: files[0].targetDept,
     batch,
   });
-  const filesToUpload = files.filter(
-  f => !f.originalname.startsWith("meta") && !f.originalname.startsWith("__signature1")&& !f.originalname.startsWith("__signature2"))
+  const filesToUpload = files.filter(f => !f.originalname.startsWith("meta") && !f.originalname.startsWith("__signature1")&& !f.originalname.startsWith("__signature2"))
       for (const f of filesToUpload) {
       const finalPath = path.join(targetDir, f.filename);
       await fs.promises.rename(f.tmpPath, finalPath);
@@ -110,6 +111,125 @@ if (!formData || Object.keys(formData).length === 0)
       console.log("formData received:", formData);
     }
 }
+
+if (type === "uld" ) {
+      const metaFile = files.find(f => f.originalname === "meta.json");
+      if (!metaFile) throw new Error("Meta file missing!");
+
+      const metaContent = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
+      const { formData, checkboxes } = JSON.parse(metaContent);
+
+        if (!formData || Object.keys(formData).length === 0)
+          throw new Error("formData empty!");
+
+  const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
+  const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
+  const images = files.filter(f => !f.originalname.startsWith("__signature"));
+
+  const pdfPath = path.join(targetDir, "uld.pdf");
+
+  await generateIrregularPDF({
+    formData,
+    checkboxes,
+    images,
+    signatures: { sig1, sig2 },
+    outputPath: pdfPath,
+  });
+
+  const stat = await fs.promises.stat(pdfPath);
+  await File.create({
+    filename: "uld.pdf",
+    path: `/${type}/${batch}/uld.pdf`,
+    mimetype: "application/pdf",
+    size: stat.size,
+    uploadedBy: files[0].uploadedBy,
+    department: files[0].department,
+    targetDept: files[0].targetDept,
+    batch,
+  });
+  const filesToUpload = files.filter(f => !f.originalname.startsWith("meta") && !f.originalname.startsWith("__signature1")&& !f.originalname.startsWith("__signature2"))
+      for (const f of filesToUpload) {
+      const finalPath = path.join(targetDir, f.filename);
+      await fs.promises.rename(f.tmpPath, finalPath);
+
+      const relativePath = finalPath
+        .replace(BASE_DIR, "")
+        .replace(/\\/g, "/");
+
+      await File.create({
+        filename: f.originalname,
+        path: relativePath,
+        mimetype: f.mimetype,
+        size: f.size,
+        uploadedBy: f.uploadedBy,
+        department: f.department,
+        targetDept: f.targetDept,
+        batch,
+      });
+      console.log("formData.name1:", JSON.stringify(formData.name1));
+      console.log("formData received:", formData);
+    }
+}
+
+if (type === "kh" ) {
+      const metaFile = files.find(f => f.originalname === "meta.json");
+      if (!metaFile) throw new Error("Meta file missing!");
+
+      const metaContent = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
+      const { formData, checkboxes } = JSON.parse(metaContent);
+
+        if (!formData || Object.keys(formData).length === 0)
+          throw new Error("formData empty!");
+
+  const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
+  const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
+  const images = files.filter(f => !f.originalname.startsWith("__signature"));
+
+  const pdfPath = path.join(targetDir, "kh.pdf");
+
+  await generateIrregularPDF({
+    formData,
+    checkboxes,
+    images,
+    signatures: { sig1, sig2 },
+    outputPath: pdfPath,
+  });
+
+  const stat = await fs.promises.stat(pdfPath);
+  await File.create({
+    filename: "kh.pdf",
+    path: `/${type}/${batch}/kh.pdf`,
+    mimetype: "application/pdf",
+    size: stat.size,
+    uploadedBy: files[0].uploadedBy,
+    department: files[0].department,
+    targetDept: files[0].targetDept,
+    batch,
+  });
+  const filesToUpload = files.filter(f => !f.originalname.startsWith("meta") && !f.originalname.startsWith("__signature1")&& !f.originalname.startsWith("__signature2"))
+      for (const f of filesToUpload) {
+      const finalPath = path.join(targetDir, f.filename);
+      await fs.promises.rename(f.tmpPath, finalPath);
+
+      const relativePath = finalPath
+        .replace(BASE_DIR, "")
+        .replace(/\\/g, "/");
+
+      await File.create({
+        filename: f.originalname,
+        path: relativePath,
+        mimetype: f.mimetype,
+        size: f.size,
+        uploadedBy: f.uploadedBy,
+        department: f.department,
+        targetDept: f.targetDept,
+        batch,
+      });
+      console.log("formData.name1:", JSON.stringify(formData.name1));
+      console.log("formData received:", formData);
+    }
+}
+
     process.send({ success: true });
     process.exit(0);
   } catch (err) {

@@ -1,0 +1,51 @@
+const fs = require("fs");
+const path = require("path");
+const { generateIrregularPDF } = require("../services/uldPdf");
+
+exports.createIrregular = async (req, res) => {
+  try {
+    const formData = JSON.parse(req.body.formData);
+    const checkboxes = JSON.parse(req.body.checkboxes || "{}");
+
+    const timestamp = Date.now();
+    const baseDir = path.join(
+      __dirname,
+      "..",
+      "uploads",
+      "uld",
+      String(timestamp)
+    );
+
+    fs.mkdirSync(baseDir, { recursive: true });
+
+    //  Generate PDF
+    await generateULDPDF({
+      formData,
+      checkboxes,
+      signatures: {
+        sig1: req.files.signature1?.[0],
+        sig2: req.files.signature2?.[0],
+      },
+      outputPath: path.join(baseDir, "uld.pdf"),
+    });
+
+    // Save images
+    if (req.files.images) {
+      req.files.images.forEach((img, i) => {
+        fs.writeFileSync(
+          path.join(baseDir, `img_${i + 1}.jpg`),
+          img.buffer
+        );
+      });
+    }
+
+    res.json({
+      success: true,
+      folder: timestamp,
+      images: req.files.images?.length || 0,
+    });
+  } catch (err) {
+    console.error("ULD ERROR:", err);
+    res.status(500).json({ message: "Create uld failed" });
+  }
+};

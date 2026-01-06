@@ -105,26 +105,36 @@ exports.saveFile = async (req, res) => {
       uploadedBy: req.user._id,
     }));
 
-    // // signatures
-    // const signatures = {};
-    // if (req.files.find(f => f.originalname.startsWith("__signature1"))) {
-    //   signatures.sig1 = req.files.find(f => f.originalname.startsWith("__signature1"));
-    // }
-    // if (req.files.find(f => f.originalname.startsWith("__signature2"))) {
-    //   signatures.sig2 = req.files.find(f => f.originalname.startsWith("__signature2"));
-    // }
+    let meta;
+
+if (type === "irregular") {
+  meta = {
+    formData: req.body.formData,
+    checkboxes: req.body.checkboxes,
+  };
+}
+
+if (type === "uld") {
+  meta = {
+    formData: req.body.formData,
+    checkboxes: req.body.checkboxes,
+  };
+}
+
+if (type === "kh") {
+  meta = {
+    formData: req.body.formData,
+    checkboxes: req.body.checkboxes,
+  };
+}
 
     // GỬI JOB – KHÔNG BLOCK
     await runUploadWorker({
+      
       files,
       type,
       batch,
-       meta: type === "irregular"
-    ? {
-        formData: req.body.formData,
-        checkboxes: req.body.checkboxes,
-      }
-    : undefined,
+      meta, 
     }).catch(err => {
       console.error("Worker upload failed:", err);
     });
