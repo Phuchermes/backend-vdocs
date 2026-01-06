@@ -53,7 +53,7 @@ process.on("message", async (job) => {
 
     if (type === "irregular" && job.meta) {
   const formData = JSON.parse(job.meta.formData || "{}");
-  console.log("formData.name1:", JSON.stringify(formData.name1));
+  
 
   const checkboxes = JSON.parse(job.meta.checkboxes || "{}");
 
@@ -103,6 +103,8 @@ process.on("message", async (job) => {
         targetDept: f.targetDept,
         batch,
       });
+      console.log("formData.name1:", JSON.stringify(formData.name1));
+      console.log("formData received:", formData);
     }
 }
     process.send({ success: true });
