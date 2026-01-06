@@ -27,8 +27,6 @@ if (job.meta) {
 }
 
 // bắt buộc phải parse formData + checkboxes
-let formData = {};
-let checkboxes = {};
 if (meta.formData) {
   formData = typeof meta.formData === "string" ? JSON.parse(meta.formData) : meta.formData;
 }
