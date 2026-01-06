@@ -17,6 +17,8 @@ exports.generateIrregularPDF = async ({
   signatures,
   outputPath,
 }) => {
+  if (!formData || Object.keys(formData).length === 0) throw new Error("formData trống!");
+
 
   const templatePath = path.join(__dirname,"../assets/784708725.pdf");
   const fontPath = path.join(__dirname, "../assets/NotoSans-Regular.ttf"); 
@@ -145,6 +147,6 @@ exports.generateIrregularPDF = async ({
 
   const out = await pdfDoc.save();
   fs.writeFileSync(outputPath, out);
-  
   console.log("PDF generated:", outputPath);
+  return outputPath;
 };

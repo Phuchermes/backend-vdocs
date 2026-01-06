@@ -52,10 +52,8 @@ process.on("message", async (job) => {
     await ensureDir(targetDir);
 
     if (type === "irregular" && job.meta) {
-  const formData = JSON.parse(job.meta.formData || "{}");
-  
-
-  const checkboxes = JSON.parse(job.meta.checkboxes || "{}");
+const formData = job.meta?.formData || {};
+const checkboxes = job.meta?.checkboxes || {};
 
   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
