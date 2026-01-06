@@ -59,12 +59,12 @@ exports.generateIrregularPDF = async ({
       const safeText = (v) =>
     typeof v === "string" ? v : v != null ? String(v) : "";
     
-page.drawText("Tiếng Việt: Đặng Văn Khoa - thử nghiệm", {
-  x: 50,
-  y: height - 50,
-  size: 40,
-  font
-});
+// page.drawText("Tiếng Việt: Đặng Văn Khoa - thử nghiệm", {
+//   x: 50,
+//   y: height - 50,
+//   size: 40,
+//   font
+// });
 
 
     page.drawText(safeText(formData.location), { x: 120, y: height - 226, size: fontSize, font, color: rgb(0,0,0) });
