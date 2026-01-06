@@ -57,7 +57,7 @@ process.on("message", async (job) => {
 process.on("message", async (job) => {
   const { files, type, batch } = job;
 
-    const targetDir = path.join(BASE_DIR, type, String(batch));
+    const targetDir = path.join(__dirname, "../uploads/irregular.pdf");
     await ensureDir(targetDir);
   try {
     // parse meta an toàn
