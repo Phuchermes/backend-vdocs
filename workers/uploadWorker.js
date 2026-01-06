@@ -87,8 +87,7 @@ if (!formData || Object.keys(formData).length === 0)
     batch,
   });
   const filesToUpload = files.filter(
-  f => f !== sig1 && f !== sig2
-);
+  f => !f.originalname.startsWith("meta") && !f.originalname.startsWith("__signature1")&& !f.originalname.startsWith("__signature2"))
       for (const f of filesToUpload) {
       const finalPath = path.join(targetDir, f.filename);
       await fs.promises.rename(f.tmpPath, finalPath);
