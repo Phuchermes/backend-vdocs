@@ -60,6 +60,7 @@ try {
   console.error("Meta JSON parse failed:", e);
   meta = {};
 }
+console.log("RAW job.meta:", job.meta);
 
 const formData = meta.formData || {};
 const checkboxes = meta.checkboxes || {};
