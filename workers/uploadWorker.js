@@ -54,10 +54,11 @@ process.on("message", async (job) => {
     if (type === "irregular" && job.meta) {
 let meta = {};
 try {
-  meta = JSON.parse(job.meta);
+  // job.meta có thể đã là object hoặc string
+  meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
 } catch (e) {
   console.error("Meta JSON parse failed:", e);
-  meta={};
+  meta = {};
 }
 
 const formData = meta.formData || {};
