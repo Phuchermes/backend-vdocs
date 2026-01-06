@@ -51,39 +51,18 @@ process.on("message", async (job) => {
     const targetDir = path.join(BASE_DIR, type, String(batch));
     await ensureDir(targetDir);
 
-    if (type === "irregular" && job.meta) {
-// let meta = {};
-// try {
-//   // job.meta có thể đã là object hoặc string
-//   meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
-// } catch (e) {
-//   console.error("Meta JSON parse failed:", e);
-//   meta = {};
-// }
-// console.log("RAW job.meta:", job.meta);
+    if (type === "irregular" ) {
+      const metaFile = files.find(f => f.originalname === "meta.json");
+      let formData = {}, checkboxes = {};
+      if (metaFile) {
+        const content = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
+        const meta = JSON.parse(content);
+        formData = meta.formData || {};
+        checkboxes = meta.checkboxes || {};
+      }
 
-// const formData = meta.formData || {};
-// const checkboxes = meta.checkboxes || {};
-let meta = {};
-if (job.meta) {
-  // nếu job.meta là string JSON, parse, nếu là object thì dùng luôn
-  meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
-}
-
-// bắt buộc phải parse formData + checkboxes
-let formData = {};
-let checkboxes = {};
-if (meta.formData) {
-  formData = typeof meta.formData === "string" ? JSON.parse(meta.formData) : meta.formData;
-}
-if (meta.checkboxes) {
-  checkboxes = typeof meta.checkboxes === "string" ? JSON.parse(meta.checkboxes) : meta.checkboxes;
-}
-
-if (!formData || Object.keys(formData).length === 0) {
-  console.log("Job meta:", job.meta);
-  throw new Error("formData empty!"); // debug thêm
-}
+      if (!formData || Object.keys(formData).length === 0)
+        throw new Error("formData empty!");
 
   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));

@@ -20,26 +20,19 @@ exports.generateIrregularPDF = async ({
   outputPath,
 }) => {
   
-  let meta = {};
-if (job.meta) {
-  // nếu job.meta là string JSON, parse, nếu là object thì dùng luôn
-  meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
-}
+  const metaFile = files.find(f => f.originalname === "meta.json");
+        let formData = {}, checkboxes = {};
+        if (metaFile) {
+          const content = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
+          const meta = JSON.parse(content);
+          formData = meta.formData || {};
+          checkboxes = meta.checkboxes || {};
+        }
+  
+        if (!formData || Object.keys(formData).length === 0)
+          throw new Error("formData empty!");
+  
 
-// bắt buộc phải parse formData + checkboxes
-if (meta.formData) {
-  formData = typeof meta.formData === "string" ? JSON.parse(meta.formData) : meta.formData;
-}
-if (meta.checkboxes) {
-  checkboxes = typeof meta.checkboxes === "string" ? JSON.parse(meta.checkboxes) : meta.checkboxes;
-}
-
-if (!formData || Object.keys(formData).length === 0) {
-  console.log("Job meta:", job.meta);
-  throw new Error("formData empty!"); // debug thêm
-}
-
-formData = parsedFormData; // dùng tiếp trong PDF
 
   const templatePath = path.join(__dirname,"../assets/784708725.pdf");
   const fontPath = path.join(__dirname, "../assets/NotoSans-Regular.ttf"); 
