@@ -17,6 +17,33 @@ exports.generateIrregularPDF = async ({
   signatures,
   outputPath,
 }) => {
+  const formData = {
+  day: job.body.formData_day,
+  month: job.body.formData_month,
+  year: job.body.formData_year,
+  time: job.body.formData_time,
+  location: job.body.formData_location,
+  name1: job.body.formData_name1,
+  name2: job.body.formData_name2,
+  dept1: job.body.formData_dept1,
+  dept2: job.body.formData_dept2,
+  info: job.body.formData_info,
+  tag: job.body.formData_tag,
+  from: job.body.formData_from,
+  to: job.body.formData_to,
+  cause: job.body.formData_cause,
+  resolve: job.body.formData_resolve,
+  rep: job.body.formData_rep,
+};
+
+const checkboxes = {
+  damaged: job.body.checkbox_damaged === "1",
+  wet: job.body.checkbox_wet === "1",
+  leaking: job.body.checkbox_leaking === "1",
+  other: job.body.checkbox_other === "1",
+};
+
+const targetDept = job.body.targetDept;
   let parsedFormData = {};
 try {
   parsedFormData = typeof formData === "string" ? JSON.parse(formData) : formData;
