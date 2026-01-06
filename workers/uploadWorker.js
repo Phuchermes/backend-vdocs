@@ -61,7 +61,6 @@ process.on("message", async (job) => {
 
   const pdfPath = path.join(targetDir, "irregular.pdf");
 
-
   await generateIrregularPDF({
     formData,
     checkboxes,
@@ -81,13 +80,10 @@ process.on("message", async (job) => {
     targetDept: files[0].targetDept,
     batch,
   });
-}
-
-const filesToUpload = files.filter(
+  const filesToUpload = files.filter(
   f => f !== sig1 && f !== sig2
 );
-
-    for (const f of filesToUpload) {
+      for (const f of filesToUpload) {
       const finalPath = path.join(targetDir, f.filename);
       await fs.promises.rename(f.tmpPath, finalPath);
 
@@ -106,7 +102,7 @@ const filesToUpload = files.filter(
         batch,
       });
     }
-
+}
     process.send({ success: true });
     process.exit(0);
   } catch (err) {
