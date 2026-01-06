@@ -3,6 +3,14 @@ const path = require("path");
 const { PDFDocument, rgb } = require("pdf-lib");
 const fontkit = require("@pdf-lib/fontkit");
 
+/**
+ * @param {Object} options
+ * @param {Object} options.formData
+ * @param {Object} options.checkboxes
+ * @param {Object} options.signatures  signature1, signature2 (base64 hoặc file path)
+ * @param {string} options.outputPath
+ */
+
 exports.generateIrregularPDF = async ({
   formData,
   checkboxes,
@@ -36,77 +44,77 @@ exports.generateIrregularPDF = async ({
 // });
 
 
-  //   page.drawText(safeText(formData.location), { x: 120, y: height - 226, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.time), { x: 90, y: height - 166, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.day), { x: 225, y: height - 166, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.month), { x: 305, y: height - 166, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.year), { x: 380, y: height - 166, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.location), { x: 120, y: height - 226, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.time), { x: 90, y: height - 166, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.day), { x: 225, y: height - 166, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.month), { x: 305, y: height - 166, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.year), { x: 380, y: height - 166, size: fontSize, font, color: rgb(0,0,0) });
 
-  //   page.drawText(safeText(formData.name1), { x: 90, y: height - 300, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.name2), { x: 90, y: height - 330, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.dept1), { x: 440, y: height - 300, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.dept2), { x: 440, y: height - 330, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.name1), { x: 90, y: height - 300, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.name2), { x: 90, y: height - 330, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.dept1), { x: 440, y: height - 300, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.dept2), { x: 440, y: height - 330, size: fontSize, font, color: rgb(0,0,0) });
 
-  //   page.drawText(safeText(formData.info), { x: 210, y: height - 370, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.tag), { x: 92, y: height - 401, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.info), { x: 210, y: height - 370, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.tag), { x: 92, y: height - 401, size: fontSize, font, color: rgb(0,0,0) });
 
-  //   page.drawText(safeText(formData.location), { x: 145, y: height - 434, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.from), { x: 280, y: height - 434, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.to), { x: 420, y: height - 434, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.location), { x: 145, y: height - 434, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.from), { x: 280, y: height - 434, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.to), { x: 420, y: height - 434, size: fontSize, font, color: rgb(0,0,0) });
 
-  //   page.drawText(safeText(formData.info), { x: 90, y: height - 467, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.cause), { x: 100, y: height - 500, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.resolve), { x: 180, y: height - 535, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.info), { x: 90, y: height - 467, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.cause), { x: 100, y: height - 500, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.resolve), { x: 180, y: height - 535, size: fontSize, font, color: rgb(0,0,0) });
 
-  //   page.drawText(safeText(formData.rep), { x: 228, y: height - 602, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.rep), { x: 228, y: height - 602, size: fontSize, font, color: rgb(0,0,0) });
 
-  //   page.drawText(safeText(formData.dept1), { x: 280, y: height - 682, size: fontSize, font, color: rgb(0,0,0) });
-  //   page.drawText(safeText(formData.dept2), { x: 450, y: height - 682, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.dept1), { x: 280, y: height - 682, size: fontSize, font, color: rgb(0,0,0) });
+    page.drawText(safeText(formData.dept2), { x: 450, y: height - 682, size: fontSize, font, color: rgb(0,0,0) });
     
 
-  // // checkbox
-  // if (checkboxes.damaged)
-  //   page.drawText(safeText("X"), { x: 178, y: height - 114, size: 14, font, color: rgb(0,0,0) });
-  // if (checkboxes.wet)
-  //   page.drawText(safeText("X"), { x: 294, y: height - 114, size: 14, font, color: rgb(0,0,0) });
-  // if (checkboxes.leaking)
-  //   page.drawText(safeText("X"), { x: 420, y: height - 114, size: 14, font, color: rgb(0,0,0) });
-  // if (checkboxes.other)
-  //   page.drawText(safeText("X"), { x: 526, y: height - 114, size: 14, font, color: rgb(0,0,0) });
+  // checkbox
+  if (checkboxes.damaged)
+    page.drawText(safeText("X"), { x: 178, y: height - 114, size: 14, font, color: rgb(0,0,0) });
+  if (checkboxes.wet)
+    page.drawText(safeText("X"), { x: 294, y: height - 114, size: 14, font, color: rgb(0,0,0) });
+  if (checkboxes.leaking)
+    page.drawText(safeText("X"), { x: 420, y: height - 114, size: 14, font, color: rgb(0,0,0) });
+  if (checkboxes.other)
+    page.drawText(safeText("X"), { x: 526, y: height - 114, size: 14, font, color: rgb(0,0,0) });
 
-  // ==== DRAW TEXT FIELDS ====
-  const textFields = [
-    { key: "location", x: 120, y: height - 226 },
-    { key: "time", x: 90, y: height - 166 },
-    { key: "day", x: 225, y: height - 166 },
-    { key: "month", x: 305, y: height - 166 },
-    { key: "year", x: 380, y: height - 166 },
-    { key: "name1", x: 90, y: height - 300 },
-    { key: "name2", x: 90, y: height - 330 },
-    { key: "dept1", x: 440, y: height - 300 },
-    { key: "dept2", x: 440, y: height - 330 },
-    { key: "info", x: 210, y: height - 370 },
-    { key: "tag", x: 92, y: height - 401 },
-    { key: "from", x: 280, y: height - 434 },
-    { key: "to", x: 420, y: height - 434 },
-    { key: "cause", x: 100, y: height - 500 },
-    { key: "resolve", x: 180, y: height - 535 },
-    { key: "rep", x: 228, y: height - 602 },
-  ];
+  // // ==== DRAW TEXT FIELDS ====
+  // const textFields = [
+  //   { key: "location", x: 120, y: height - 226 },
+  //   { key: "time", x: 90, y: height - 166 },
+  //   { key: "day", x: 225, y: height - 166 },
+  //   { key: "month", x: 305, y: height - 166 },
+  //   { key: "year", x: 380, y: height - 166 },
+  //   { key: "name1", x: 90, y: height - 300 },
+  //   { key: "name2", x: 90, y: height - 330 },
+  //   { key: "dept1", x: 440, y: height - 300 },
+  //   { key: "dept2", x: 440, y: height - 330 },
+  //   { key: "info", x: 210, y: height - 370 },
+  //   { key: "tag", x: 92, y: height - 401 },
+  //   { key: "from", x: 280, y: height - 434 },
+  //   { key: "to", x: 420, y: height - 434 },
+  //   { key: "cause", x: 100, y: height - 500 },
+  //   { key: "resolve", x: 180, y: height - 535 },
+  //   { key: "rep", x: 228, y: height - 602 },
+  // ];
 
-  for (const field of textFields) {
-    const val = safeText(formData[field.key]);
-    if (val) {
-      page.drawText(val, {
-        x: field.x,
-        y: field.y,
-        size: fontSize,
-        font,
-        color: rgb(0, 0, 0),
-        maxWidth: 400, // tránh tràn chữ
-      });
-    }
-  }
+  // for (const field of textFields) {
+  //   const val = safeText(formData[field.key]);
+  //   if (val) {
+  //     page.drawText(val, {
+  //       x: field.x,
+  //       y: field.y,
+  //       size: fontSize,
+  //       font,
+  //       color: rgb(0, 0, 0),
+  //       maxWidth: 400, // tránh tràn chữ
+  //     });
+  //   }
+  // }
 
   // ==== CHECKBOXES ====
   const checkboxMap = {
@@ -137,4 +145,6 @@ exports.generateIrregularPDF = async ({
 
   const out = await pdfDoc.save();
   fs.writeFileSync(outputPath, out);
+  
+  console.log("PDF generated:", outputPath);
 };
