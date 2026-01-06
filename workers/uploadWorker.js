@@ -64,17 +64,26 @@ process.on("message", async (job) => {
 
 // const formData = meta.formData || {};
 // const checkboxes = meta.checkboxes || {};
-let meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
+let meta = {};
+if (job.meta) {
+  // nếu job.meta là string JSON, parse, nếu là object thì dùng luôn
+  meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
+}
 
-      let formData = meta.formData || {};
-      if (typeof formData === "string") formData = JSON.parse(formData);
+// bắt buộc phải parse formData + checkboxes
+let formData = {};
+let checkboxes = {};
+if (meta.formData) {
+  formData = typeof meta.formData === "string" ? JSON.parse(meta.formData) : meta.formData;
+}
+if (meta.checkboxes) {
+  checkboxes = typeof meta.checkboxes === "string" ? JSON.parse(meta.checkboxes) : meta.checkboxes;
+}
 
-      let checkboxes = meta.checkboxes || {};
-      if (typeof checkboxes === "string") checkboxes = JSON.parse(checkboxes);
-
-      if (!formData || Object.keys(formData).length === 0)
-        throw new Error("formData empty!");
-
+if (!formData || Object.keys(formData).length === 0) {
+  console.log("Job meta:", job.meta);
+  throw new Error("formData empty!"); // debug thêm
+}
 
   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
