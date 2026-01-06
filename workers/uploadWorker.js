@@ -46,13 +46,14 @@ process.on("message", async (job) => {
     /* ======================================================
        ================= FILES UPLOAD ======================
        ====================================================== */
-    const { files, type, batch } = job;
-
-    const targetDir = path.join(BASE_DIR, type, String(batch));
-    await ensureDir(targetDir);
+    
 
     if (type === "irregular" && job.meta) {
 process.on("message", async (job) => {
+  const { files, type, batch } = job;
+
+    const targetDir = path.join(BASE_DIR, type, String(batch));
+    await ensureDir(targetDir);
   try {
     // parse meta an toàn
     let meta = {};
@@ -84,7 +85,7 @@ process.on("message", async (job) => {
     signatures: { sig1, sig2 },
     outputPath: pdfPath,
   });
-      console.log("PDF generated successfully!", pdfPath);
+    console.log("PDF generated successfully!", pdfPath);
     process.send({ success: true });
     process.exit(0);
   } catch (err) {
