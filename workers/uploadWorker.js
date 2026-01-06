@@ -64,7 +64,7 @@ process.on("message", async (job) => {
 
 // const formData = meta.formData || {};
 // const checkboxes = meta.checkboxes || {};
-// let meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
+let meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
 
       let formData = meta.formData || {};
       if (typeof formData === "string") formData = JSON.parse(formData);
