@@ -52,18 +52,48 @@ process.on("message", async (job) => {
     await ensureDir(targetDir);
 
     if (type === "irregular" && job.meta) {
-let meta = {};
-try {
-  // job.meta có thể đã là object hoặc string
-  meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
-} catch (e) {
-  console.error("Meta JSON parse failed:", e);
-  meta = {};
-}
-console.log("RAW job.meta:", job.meta);
+// let meta = {};
+// try {
+//   // job.meta có thể đã là object hoặc string
+//   meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
+// } catch (e) {
+//   console.error("Meta JSON parse failed:", e);
+//   meta = {};
+// }
+// console.log("RAW job.meta:", job.meta);
 
-const formData = meta.formData || {};
-const checkboxes = meta.checkboxes || {};
+// const formData = meta.formData || {};
+// const checkboxes = meta.checkboxes || {};
+
+let formData = {};
+let checkboxes = {};
+let targetDept = "";
+
+if (job.meta) {
+  let metaObj;
+  try {
+    metaObj = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
+  } catch (err) {
+    console.error("Meta JSON parse failed:", job.meta);
+    throw new Error("MetaJson failed: invalid JSON");
+  }
+
+  // formData
+  if (metaObj.formData) {
+    formData = typeof metaObj.formData === "string" ? JSON.parse(metaObj.formData) : metaObj.formData;
+  }
+  
+  // checkboxes
+  if (metaObj.checkboxes) {
+    checkboxes = typeof metaObj.checkboxes === "string" ? JSON.parse(metaObj.checkboxes) : metaObj.checkboxes;
+  }
+
+  targetDept = metaObj.targetDept || "";
+}
+
+// Bây giờ check
+if (!formData || Object.keys(formData).length === 0)
+  throw new Error("formData empty!");
 
 
   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
