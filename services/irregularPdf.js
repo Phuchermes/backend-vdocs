@@ -20,18 +20,18 @@ exports.generateIrregularPDF = async ({
   outputPath,
 }) => {
   
-//   let parsedFormData = {};
-// try {
-//   parsedFormData = typeof formData === "string" ? JSON.parse(formData) : formData;
-// } catch(e) {
-//   console.error("Cannot parse formData:", formData);
-//   throw new Error("formData parse failed!");
-// }
+  let parsedFormData = {};
+try {
+  parsedFormData = typeof formData === "string" ? JSON.parse(formData) : formData;
+} catch(e) {
+  console.error("Cannot parse formData:", formData);
+  throw new Error("formData parse failed!");
+}
 
-// if (!parsedFormData || Object.keys(parsedFormData).length === 0)
-//   throw new Error("formData empty!");
+if (!parsedFormData || Object.keys(parsedFormData).length === 0)
+  throw new Error("formData empty!");
 
-// formData = parsedFormData; // dùng tiếp trong PDF
+formData = parsedFormData; // dùng tiếp trong PDF
 
   const templatePath = path.join(__dirname,"../assets/784708725.pdf");
   const fontPath = path.join(__dirname, "../assets/NotoSans-Regular.ttf"); 

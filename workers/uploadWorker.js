@@ -72,8 +72,8 @@ process.on("message", async (job) => {
       let checkboxes = meta.checkboxes || {};
       if (typeof checkboxes === "string") checkboxes = JSON.parse(checkboxes);
 
-//       if (!formData || Object.keys(formData).length === 0)
-//         throw new Error("formData empty!");
+      if (!formData || Object.keys(formData).length === 0)
+        throw new Error("formData empty!");
 
 
   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
