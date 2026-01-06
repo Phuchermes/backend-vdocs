@@ -60,7 +60,7 @@ process.on("message", async (job) => {
   const images = files.filter(f => !f.originalname.startsWith("__signature"));
 
   const pdfPath = path.join(targetDir, "irregular.pdf");
-  const fontPath = path.join(__dirname, "../assets/NotoSans-Regular.ttf"); 
+
 
   await generateIrregularPDF({
     formData,
@@ -68,7 +68,6 @@ process.on("message", async (job) => {
     images,
     signatures: { sig1, sig2 },
     outputPath: pdfPath,
-    fontPath,
   });
 
   const stat = await fs.promises.stat(pdfPath);
