@@ -46,36 +46,35 @@ process.on("message", async (job) => {
     /* ======================================================
        ================= FILES UPLOAD ======================
        ====================================================== */
-    
-       const { files, type, batch } = job;
-      const targetDir = path.join(BASE_DIR, type, String(batch));
+    const { files, type, batch } = job;
+
+    const targetDir = path.join(BASE_DIR, type, String(batch));
     await ensureDir(targetDir);
+
     if (type === "irregular" && job.meta) {
-      const { files, type, batch } = job;
-      const targetDir = path.join(BASE_DIR, type, String(batch));
-    await ensureDir(targetDir);
-process.on("message", async (job) => {
-  const { files, type, batch } = job;
+// let meta = {};
+// try {
+//   // job.meta có thể đã là object hoặc string
+//   meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
+// } catch (e) {
+//   console.error("Meta JSON parse failed:", e);
+//   meta = {};
+// }
+// console.log("RAW job.meta:", job.meta);
 
-    const targetDir = path.join(__dirname, "../uploads/irregular.pdf");
-    await ensureDir(targetDir);
-  try {
-    // parse meta an toàn
-    let meta = {};
-    if (job.meta) {
-      meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
-    }
+// const formData = meta.formData || {};
+// const checkboxes = meta.checkboxes || {};
+let meta = typeof job.meta === "string" ? JSON.parse(job.meta) : job.meta;
 
-    let formData = {};
-    let checkboxes = {};
-    if (meta.formData) {
-      formData = typeof meta.formData === "string" ? JSON.parse(meta.formData) : meta.formData;
-    }
-    if (meta.checkboxes) {
-      checkboxes = typeof meta.checkboxes === "string" ? JSON.parse(meta.checkboxes) : meta.checkboxes;
-    }
-    if (!formData || Object.keys(formData).length === 0) throw new Error("formData empty!");
-  
+      let formData = meta.formData || {};
+      if (typeof formData === "string") formData = JSON.parse(formData);
+
+      let checkboxes = meta.checkboxes || {};
+      if (typeof checkboxes === "string") checkboxes = JSON.parse(checkboxes);
+
+      if (!formData || Object.keys(formData).length === 0)
+        throw new Error("formData empty!");
+
 
   const sig1 = files.find(f => f.originalname.startsWith("__signature1"));
   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
@@ -90,15 +89,6 @@ process.on("message", async (job) => {
     signatures: { sig1, sig2 },
     outputPath: pdfPath,
   });
-    console.log("PDF generated successfully!", pdfPath);
-    process.send({ success: true });
-    process.exit(0);
-  } catch (err) {
-    console.error("Worker error:", err);
-    process.send({ success: false, error: err.message });
-    process.exit(1);
-  }
-});
 
   const stat = await fs.promises.stat(pdfPath);
   await File.create({
@@ -135,9 +125,7 @@ process.on("message", async (job) => {
       console.log("formData.name1:", JSON.stringify(formData.name1));
       console.log("formData received:", formData);
     }
-    
-  }
-
+}
     process.send({ success: true });
     process.exit(0);
   } catch (err) {
