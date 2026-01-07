@@ -9,6 +9,7 @@ const { generateIrregularPDF } = require("../services/irregularPdf");
 const { generateULDPDF } = require("../services/uldPdf");
 const { generateKHPDF } = require("../services/khPdf");
 const { generateAVIHPDF } = require("../services/avihPdf");
+const { parentPort } = require("worker_threads");
 
 const BASE_DIR = path.join(__dirname, "../uploads");
 
@@ -249,7 +250,7 @@ if (type === "avih" ) {
 parentPort.on("message", async ({ formData, rows, images, signavih }) => {
   
   console.log("WORKER SIG1:", signavih?.sig1?.tmpPath);
-  console.log("WORKER SIG2:", signaavih?.sig2?.tmpPath);
+  console.log("WORKER SIG2:", signavih?.sig2?.tmpPath);
   await generateAVIHPDF({
     formData,
     rows,
