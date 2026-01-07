@@ -65,13 +65,12 @@ exports.generateAVIHPDF = async ({
           const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig2.tmpPath));
           page.drawImage(img, { x: 570, y: baseY, width: img.width * 0.07, height: img.height * 0.07 });
         }
-
-        const form = pdfDoc.getForm();
+    }
+    const form = pdfDoc.getForm();
         form.flatten();
         
           const out = await pdfDoc.save();
           fs.writeFileSync(outputPath, out);
           console.log("PDF generated:", outputPath);
           return outputPath;
-    }
-}
+};
