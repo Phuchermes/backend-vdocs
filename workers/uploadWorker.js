@@ -67,7 +67,7 @@ process.on("message", async (job) => {
   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
   const images = files.filter(f => !f.originalname.startsWith("__signature"));
 
-  const pdfPath = path.join(targetDir, "irregular.pdf");
+  const pdfPath = path.join(targetDir, `${formData.location}.pdf`);
 
   await generateIrregularPDF({
     formData,
@@ -78,8 +78,9 @@ process.on("message", async (job) => {
   });
 
   const stat = await fs.promises.stat(pdfPath);
+  const finalIrregularName = `${formData.location}.pdf`;
   await File.create({
-    filename: "irregular.pdf",
+    filename: finalIrregularName,
     path: `/${type}/${batch}/irregular.pdf`,
     mimetype: "application/pdf",
     size: stat.size,
@@ -126,7 +127,7 @@ if (type === "uld" ) {
   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
   const images = files.filter(f => !f.originalname.startsWith("__signature"));
 
-  const pdfPath = path.join(targetDir, "uld.pdf");
+  const pdfPath = path.join(targetDir, `${formData.location}.pdf`);
 
   await generateULDPDF({
     formData,
@@ -137,8 +138,9 @@ if (type === "uld" ) {
   });
 
   const stat = await fs.promises.stat(pdfPath);
+  const finalULDName = `${formData.location}.pdf`;
   await File.create({
-    filename: "uld.pdf",
+    filename: finalULDName,
     path: `/${type}/${batch}/uld.pdf`,
     mimetype: "application/pdf",
     size: stat.size,
@@ -185,7 +187,7 @@ if (type === "kh" ) {
   const sig2 = files.find(f => f.originalname.startsWith("__signature2"));
   const images = files.filter(f => !f.originalname.startsWith("__signature"));
 
-  const pdfPath = path.join(targetDir, "kh.pdf");
+  const pdfPath = path.join(targetDir, `${formData.location}.pdf`);
 
   await generateKHPDF({
     formData,
@@ -196,8 +198,9 @@ if (type === "kh" ) {
   });
 
   const stat = await fs.promises.stat(pdfPath);
+  const finalKHName = `${formData.location}.pdf`;
   await File.create({
-    filename: "kh.pdf",
+    filename: finalKHName,
     path: `/${type}/${batch}/kh.pdf`,
     mimetype: "application/pdf",
     size: stat.size,
