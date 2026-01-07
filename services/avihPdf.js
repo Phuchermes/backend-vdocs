@@ -56,13 +56,13 @@ exports.generateAVIHPDF = async ({
 
         // Draw NV1 signature
         if (row.signavih1.sig1 && row.signavih1.sig1.startsWith("data:image")) {
-          const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig1.tmpPath));
+          const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig1.buffer));
           page.drawImage(img, { x: 500, y: baseY , width: img.width * 0.07, height: img.height * 0.07 });
         }
 
         // Draw NV2 signature
         if (row.signavih2.sig1 && row.signavih2.sig1.startsWith("data:image")) {
-          const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig2.tmpPath));
+          const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig2.buffer));
           page.drawImage(img, { x: 570, y: baseY, width: img.width * 0.07, height: img.height * 0.07 });
         }
     }
