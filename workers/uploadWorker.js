@@ -81,7 +81,7 @@ process.on("message", async (job) => {
   const finalIrregularName = `${formData.location}.pdf`;
   await File.create({
     filename: finalIrregularName,
-    path: `/${type}/${batch}/irregular.pdf`,
+    path: `/${type}/${batch}/${formData.location}.pdf`,
     mimetype: "application/pdf",
     size: stat.size,
     uploadedBy: files[0].uploadedBy,
@@ -141,7 +141,7 @@ if (type === "uld" ) {
   const finalULDName = `${formData.location}.pdf`;
   await File.create({
     filename: finalULDName,
-    path: `/${type}/${batch}/uld.pdf`,
+    path: `/${type}/${batch}/${formData.location}.pdf`,
     mimetype: "application/pdf",
     size: stat.size,
     uploadedBy: files[0].uploadedBy,
@@ -201,7 +201,7 @@ if (type === "kh" ) {
   const finalKHName = `${formData.location}.pdf`;
   await File.create({
     filename: finalKHName,
-    path: `/${type}/${batch}/kh.pdf`,
+    path: `/${type}/${batch}/${formData.location}.pdf`,
     mimetype: "application/pdf",
     size: stat.size,
     uploadedBy: files[0].uploadedBy,
