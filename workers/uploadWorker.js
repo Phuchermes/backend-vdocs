@@ -8,6 +8,7 @@ const Document = require("../models/Document");
 const { generateIrregularPDF } = require("../services/irregularPdf");
 const { generateULDPDF } = require("../services/uldPdf");
 const { generateKHPDF } = require("../services/khPdf");
+const { generateAVIHPDF } = require("../services/avihPdf");
 
 const BASE_DIR = path.join(__dirname, "../uploads");
 
