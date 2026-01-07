@@ -259,10 +259,10 @@ if (type === "avih" ) {
   });
 
   const stat = await fs.promises.stat(pdfPath);
-  const finalAVIHName = `${formData.location}.pdf`;
+  const finalAVIHName = `${formData.trans}.pdf`;
   await File.create({
     filename: finalAVIHName,
-    path: `/${type}/${batch}/${formData.location}.pdf`,
+    path: `/${type}/${batch}/${formData.trans}.pdf`,
     mimetype: "application/pdf",
     size: stat.size,
     uploadedBy: files[0].uploadedBy,
