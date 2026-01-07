@@ -241,9 +241,9 @@ if (type === "avih" ) {
         if (!formData || Object.keys(formData).length === 0)
           throw new Error("formData empty!");
 
-  const sig1 = files.find(f => f.originalname.startsWith("__signavih1"));
-  const sig2 = files.find(f => f.originalname.startsWith("__signavih2"));
-  const images = files.filter(f => !f.originalname.startsWith("__signavih"));
+  const sig1 = files.find(f => f.originalname.startsWith("signavih1"));
+  const sig2 = files.find(f => f.originalname.startsWith("signavih2"));
+  const images = files.filter(f => !f.originalname.startsWith("signavih"));
 
   const pdfPath = path.join(targetDir, `${formData.trans}.pdf`);
 
@@ -269,7 +269,7 @@ console.log("FOUND SIG2:", sig2?.tmpPath);
     targetDept: files[0].targetDept,
     batch,
   });
-  const filesToUpload = files.filter(f => !f.originalname.startsWith("meta") && !f.originalname.startsWith("__signavih1")&& !f.originalname.startsWith("__signavih2"))
+  const filesToUpload = files.filter(f => !f.originalname.startsWith("meta") && !f.originalname.startsWith("signavih1")&& !f.originalname.startsWith("signavih2"))
       for (const f of filesToUpload) {
       const finalPath = path.join(targetDir, f.filename);
       await fs.promises.rename(f.tmpPath, finalPath);
