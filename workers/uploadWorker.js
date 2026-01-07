@@ -246,7 +246,10 @@ if (type === "avih" ) {
   const images = files.filter(f => !f.originalname.startsWith("__signavih"));
 
   const pdfPath = path.join(targetDir, `${formData.trans}.pdf`);
-
+parentPort.on("message", async ({ formData, rows, images, signavih }) => {
+  
+  console.log("WORKER SIG1:", signavih?.sig1?.tmpPath);
+  console.log("WORKER SIG2:", signaavih?.sig2?.tmpPath);
   await generateAVIHPDF({
     formData,
     rows,
@@ -255,7 +258,7 @@ if (type === "avih" ) {
     outputPath: pdfPath,
     
   });
-
+});
   const stat = await fs.promises.stat(pdfPath);
   const finalAVIHName = `${formData.trans}.pdf`;
   await File.create({
@@ -287,6 +290,7 @@ if (type === "avih" ) {
         targetDept: f.targetDept,
         batch,
       });
+      
       console.log("formData received:", formData);
 
     }
