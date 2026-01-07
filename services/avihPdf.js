@@ -55,16 +55,23 @@ exports.generateAVIHPDF = async ({
         page.drawText(safeText(row.tag), { x: 450, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
 
         // Draw NV1 signature
-        if (signavih?.sig1?.tmpPath) {
-          const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig1.tmpPath));
-          page.drawImage(img, { x: 500, y: baseY , width: img.width * 0.07, height: img.height * 0.07 });
-        }
+        // Draw NV1 signature
+if (signavih?.sig1) {
+  const sig1Path = signavih.sig1.tmpPath || signavih.sig1.path;
+  if (sig1Path) {
+    const img = await pdfDoc.embedPng(fs.readFileSync(sig1Path));
+    page.drawImage(img, { x: 500, y: baseY, width: img.width * 0.07, height: img.height * 0.07 });
+  }
+}
 
-        // Draw NV2 signature
-        if (signavih?.sig2?.tmpPath) {
-          const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig2.tmpPath));
-          page.drawImage(img, { x: 570, y: baseY, width: img.width * 0.07, height: img.height * 0.07 });
-        }
+// Draw NV2 signature
+if (signavih?.sig2) {
+  const sig2Path = signavih.sig2.tmpPath || signavih.sig2.path;
+  if (sig2Path) {
+    const img = await pdfDoc.embedPng(fs.readFileSync(sig2Path));
+    page.drawImage(img, { x: 570, y: baseY, width: img.width * 0.07, height: img.height * 0.07 });
+  }
+}
     }
     const form = pdfDoc.getForm();
         form.flatten();
