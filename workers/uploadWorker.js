@@ -254,7 +254,7 @@ if (type === "avih" ) {
     formData,
     rows,
     images,
-    signatures: { sig1, sig2 },
+    signavih: { sig1, sig2 },
     outputPath: pdfPath,
   });
 
