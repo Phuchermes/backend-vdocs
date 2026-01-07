@@ -248,7 +248,7 @@ if (type === "avih" ) {
   const sig2 = files.find(f => f.originalname.startsWith("__signavih2"));
   const images = files.filter(f => !f.originalname.startsWith("__signavih"));
 
-  const pdfPath = path.join(targetDir, `${formData.location}.pdf`);
+  const pdfPath = path.join(targetDir, `${formData.trans}.pdf`);
 
   await generateAVIHPDF({
     formData,
