@@ -8,14 +8,14 @@ const fontkit = require("@pdf-lib/fontkit");
  *   - formData: { day, month, year, time, location, name1, name2, dept1, dept2, info, tag, from, to, cause, resolve, rep }
  *   - checkboxes: { damaged, wet, leaking, other }
  *   - images: [{ path, originalname }]
- *   - signavih: { sig1: file, sig2: file }
+ *   - signatures: { sig1: file, sig2: file }
  *   - outputPath: string
  */
 
 exports.generateAVIHPDF = async ({
   formData,
   rows,
-  signavih,
+  signatures,
   outputPath,
   
 }) => {
@@ -55,13 +55,13 @@ exports.generateAVIHPDF = async ({
         page.drawText(safeText(row.tag), { x: 450, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
 
         // Draw NV1 signature
-        if (row.signavih.sig1 && row.signavih.sig1.startsWith("data:image")) {
-          const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig1.buffer));
+        if (row.signavih1 && row.signavih1.startsWith("data:image")) {
+          const img = await pdfDoc.embedPng(fs.readFileSync(signavih1.sig1.tmpPath));
           page.drawImage(img, { x: 500, y: baseY , width: img.width * 0.07, height: img.height * 0.07 });
         }
 
         // Draw NV2 signature
-        if (row.signavih2.sig2 && row.signavih2.sig2.startsWith("data:image")) {
+        if (row.signavih2 && row.signavih2.startsWith("data:image")) {
           const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig2.tmpPath));
           page.drawImage(img, { x: 570, y: baseY, width: img.width * 0.07, height: img.height * 0.07 });
         }
@@ -73,4 +73,4 @@ exports.generateAVIHPDF = async ({
           fs.writeFileSync(outputPath, out);
           console.log("PDF generated:", outputPath);
           return outputPath;
-};
+}
