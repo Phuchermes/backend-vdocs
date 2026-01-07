@@ -15,7 +15,7 @@ const fontkit = require("@pdf-lib/fontkit");
 exports.generateAVIHPDF = async ({
   formData,
   rows,
-  signatures,
+  signavih,
   outputPath,
   
 }) => {
