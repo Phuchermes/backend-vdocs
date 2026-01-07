@@ -253,6 +253,7 @@ if (type === "avih" ) {
     images,
     signavih: { sig1, sig2 },
     outputPath: pdfPath,
+    
   });
 
   const stat = await fs.promises.stat(pdfPath);
@@ -287,8 +288,7 @@ if (type === "avih" ) {
         batch,
       });
       console.log("formData received:", formData);
-      console.log("SIG1 PATH:", signavih.sig1.tmpPath);
-      console.log("SIG2 PATH:", signavih.sig2.tmpPath);
+
     }
 }
 
