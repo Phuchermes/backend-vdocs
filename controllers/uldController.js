@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
-const { generateIrregularPDF } = require("../services/uldPdf");
+const { generateULDPDF } = require("../services/uldPdf");
 
-exports.createIrregular = async (req, res) => {
+exports.createULD = async (req, res) => {
   try {
     const formData = JSON.parse(req.body.formData);
     const checkboxes = JSON.parse(req.body.checkboxes || "{}");

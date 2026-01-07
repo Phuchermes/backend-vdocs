@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
-const { generateKHPDF } = require("../services/khPdf");
+const { generateAVIHPDF } = require("../services/avihPdf");
 
-exports.createKH = async (req, res) => {
+exports.createIrregular = async (req, res) => {
   try {
     const formData = JSON.parse(req.body.formData);
     const checkboxes = JSON.parse(req.body.checkboxes || "{}");
@@ -12,21 +12,21 @@ exports.createKH = async (req, res) => {
       __dirname,
       "..",
       "uploads",
-      "kh",
+      "avih",
       String(timestamp)
     );
 
     fs.mkdirSync(baseDir, { recursive: true });
 
     //  Generate PDF
-    await generateKHPDF({
+    await generateAVIHPDF({
       formData,
       checkboxes,
       signatures: {
         sig1: req.files.signature1?.[0],
         sig2: req.files.signature2?.[0],
       },
-      outputPath: path.join(baseDir, "kh.pdf"),
+      outputPath: path.join(baseDir, "avih.pdf"),
     });
 
     // Save images
@@ -45,7 +45,7 @@ exports.createKH = async (req, res) => {
       images: req.files.images?.length || 0,
     });
   } catch (err) {
-    console.error("KH ERROR:", err);
-    res.status(500).json({ message: "Create KH failed" });
+    console.error("AVIH ERROR:", err);
+    res.status(500).json({ message: "Create avih failed" });
   }
 };

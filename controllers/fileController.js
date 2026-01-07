@@ -114,6 +114,14 @@ if (type === "irregular") {
   };
 }
 
+if (type === "avih") {
+  meta = {
+    formData: req.body.formData,
+    rows: req.body.rows,
+  };
+}
+
+
 if (type === "uld") {
   meta = {
     formData: req.body.formData,
@@ -130,7 +138,6 @@ if (type === "kh") {
 
     // GỬI JOB – KHÔNG BLOCK
     await runUploadWorker({
-      
       files,
       type,
       batch,
