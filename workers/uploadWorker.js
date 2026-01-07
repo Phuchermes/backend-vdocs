@@ -288,7 +288,8 @@ console.log("FOUND SIG2:", sig2?.tmpPath);
         targetDept: f.targetDept,
         batch,
       });
-      
+      console.log("ALL FILES RECEIVED:");
+      files.forEach(f => console.log(" - ", f.originalname));
       console.log("formData received:", formData);
 
     }
