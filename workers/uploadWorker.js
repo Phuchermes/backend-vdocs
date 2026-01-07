@@ -128,7 +128,7 @@ if (type === "uld" ) {
 
   const pdfPath = path.join(targetDir, "uld.pdf");
 
-  await generateIrregularPDF({
+  await generateULDPDF({
     formData,
     checkboxes,
     images,
@@ -187,7 +187,7 @@ if (type === "kh" ) {
 
   const pdfPath = path.join(targetDir, "kh.pdf");
 
-  await generateIrregularPDF({
+  await generateKHPDF({
     formData,
     checkboxes,
     images,
