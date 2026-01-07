@@ -270,7 +270,7 @@ if (type === "avih" ) {
     targetDept: files[0].targetDept,
     batch,
   });
-  const filesToUpload = files.filter(f => !f.originalname.startsWith("meta") && !f.originalname.startsWith("__signature1")&& !f.originalname.startsWith("__signature2"))
+  const filesToUpload = files.filter(f => !f.originalname.startsWith("meta") && !f.originalname.startsWith("__signavih1")&& !f.originalname.startsWith("__signavih2"))
       for (const f of filesToUpload) {
       const finalPath = path.join(targetDir, f.filename);
       await fs.promises.rename(f.tmpPath, finalPath);
