@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { generateAVIHPDF } = require("../services/avihPdf");
 
-exports.createIrregular = async (req, res) => {
+exports.createAVIH = async (req, res) => {
   try {
     const formData = JSON.parse(req.body.formData);
 
