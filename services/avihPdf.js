@@ -55,14 +55,14 @@ exports.generateAVIHPDF = async ({
         page.drawText(safeText(row.tag), { x: 450, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
 
         // Draw NV1 signature
-        if (signavih.sig1) {
+        if (signavih?.sig1?.tmpPath) {
           const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig1.tmpPath));
           page.drawImage(img, { x: 500, y: baseY , width: img.width * 0.07, height: img.height * 0.07 });
           console.log("SIG1 PATH:", signavih.sig1.tmpPath);
         }
 
         // Draw NV2 signature
-        if (signavih.sig2) {
+        if (signavih?.sig2?.tmpPath) {
           const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig2.tmpPath));
           page.drawImage(img, { x: 570, y: baseY, width: img.width * 0.07, height: img.height * 0.07 });
           console.log("SIG2 PATH:", signavih.sig2.tmpPath);

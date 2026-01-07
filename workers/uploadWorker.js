@@ -9,7 +9,6 @@ const { generateIrregularPDF } = require("../services/irregularPdf");
 const { generateULDPDF } = require("../services/uldPdf");
 const { generateKHPDF } = require("../services/khPdf");
 const { generateAVIHPDF } = require("../services/avihPdf");
-const { parentPort } = require("worker_threads");
 
 const BASE_DIR = path.join(__dirname, "../uploads");
 
@@ -247,19 +246,17 @@ if (type === "avih" ) {
   const images = files.filter(f => !f.originalname.startsWith("__signavih"));
 
   const pdfPath = path.join(targetDir, `${formData.trans}.pdf`);
-parentPort.on("message", async ({ formData, rows, images, signavih }) => {
-  
-  console.log("WORKER SIG1:", signavih?.sig1?.tmpPath);
-  console.log("WORKER SIG2:", signavih?.sig2?.tmpPath);
+
   await generateAVIHPDF({
     formData,
     rows,
     images,
     signavih: { sig1, sig2 },
     outputPath: pdfPath,
-    
   });
-});
+  console.log("FOUND SIG1:", sig1?.tmpPath);
+console.log("FOUND SIG2:", sig2?.tmpPath);
+
   const stat = await fs.promises.stat(pdfPath);
   const finalAVIHName = `${formData.trans}.pdf`;
   await File.create({
