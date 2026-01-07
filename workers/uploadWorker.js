@@ -109,7 +109,6 @@ process.on("message", async (job) => {
         targetDept: f.targetDept,
         batch,
       });
-      console.log("formData.name1:", JSON.stringify(formData.name1));
       console.log("formData received:", formData);
     }
 }
@@ -169,7 +168,6 @@ if (type === "uld" ) {
         targetDept: f.targetDept,
         batch,
       });
-      console.log("formData.name1:", JSON.stringify(formData.name1));
       console.log("formData received:", formData);
     }
 }
@@ -229,7 +227,6 @@ if (type === "kh" ) {
         targetDept: f.targetDept,
         batch,
       });
-      console.log("formData.name1:", JSON.stringify(formData.name1));
       console.log("formData received:", formData);
     }
 }
@@ -289,7 +286,6 @@ if (type === "avih" ) {
         targetDept: f.targetDept,
         batch,
       });
-      console.log("formData.name1:", JSON.stringify(formData.name1));
       console.log("formData received:", formData);
     }
 }

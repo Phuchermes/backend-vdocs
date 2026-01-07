@@ -56,23 +56,15 @@ exports.generateAVIHPDF = async ({
 
         // Draw NV1 signature
         // Draw NV1 signature
-// NV1
-if (signavih?.sig1) {
-  const p = signavih.sig1.tmpPath || signavih.sig1.path;
-  if (p) {
-    const img = await pdfDoc.embedPng(fs.readFileSync(p));
+        
+  if (signavih.sig1) {
+    const img = await pdfDoc.embedPng(fs.readFileSync(signatures.sig1.tmpPath));
     page.drawImage(img, { x: 500, y: baseY, width: img.width * 0.07, height: img.height * 0.07 });
   }
-}
-
-// NV2
-if (signavih?.sig2) {
-  const p = signavih.sig2.tmpPath || signavih.sig2.path;
-  if (p) {
-    const img = await pdfDoc.embedPng(fs.readFileSync(p));
+  if (signavih.sig2) {
+    const img = await pdfDoc.embedPng(fs.readFileSync(signatures.sig2.tmpPath));
     page.drawImage(img, { x: 570, y: baseY, width: img.width * 0.07, height: img.height * 0.07 });
   }
-}
     }
     const form = pdfDoc.getForm();
         form.flatten();
