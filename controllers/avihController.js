@@ -5,7 +5,6 @@ const { generateAVIHPDF } = require("../services/avihPdf");
 exports.createIrregular = async (req, res) => {
   try {
     const formData = JSON.parse(req.body.formData);
-    const checkboxes = JSON.parse(req.body.checkboxes || "{}");
 
     const timestamp = Date.now();
     const baseDir = path.join(
@@ -21,10 +20,9 @@ exports.createIrregular = async (req, res) => {
     //  Generate PDF
     await generateAVIHPDF({
       formData,
-      checkboxes,
-      signatures: {
-        sig1: req.files.signature1?.[0],
-        sig2: req.files.signature2?.[0],
+      signavih: {
+        sig1: req.files.signavih1?.[0],
+        sig2: req.files.signavih2?.[0],
       },
       outputPath: path.join(baseDir, "avih.pdf"),
     });

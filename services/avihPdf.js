@@ -8,7 +8,7 @@ const fontkit = require("@pdf-lib/fontkit");
  *   - formData: { day, month, year, time, location, name1, name2, dept1, dept2, info, tag, from, to, cause, resolve, rep }
  *   - checkboxes: { damaged, wet, leaking, other }
  *   - images: [{ path, originalname }]
- *   - signatures: { sig1: file, sig2: file }
+ *   - signavih: { sig1: file, sig2: file }
  *   - outputPath: string
  */
 
