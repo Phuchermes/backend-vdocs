@@ -33,12 +33,12 @@ exports.login = async (req, res) => {
 
     const user = await User.findOne({ userId });
     if (!user) {
-      return res.status(400).json({ message: 'User ID không tồn tại' });
+      return res.status(400).json({ message: 'Mã số nhân viên không tồn tại' });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.status(400).json({ message: 'Kiểm tra lại thông tin đăng nhập' });
     }
 
     const token = jwt.sign(
