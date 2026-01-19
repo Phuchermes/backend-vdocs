@@ -295,83 +295,83 @@ console.log("FOUND SIG2:", sig2?.tmpPath);
     }
 }
 
-// if (type === "offload" ) {
-//       const metaFile = files.find(f => f.originalname === "meta.json");
-//       if (!metaFile) throw new Error("Meta file missing!");
+if (type === "offload") {
+  const metaFile = files.find(f => f.originalname === "meta.json");
+  if (!metaFile) throw new Error("Meta file missing!");
 
-//       const metaContent = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
-//       const { formData, rows } = JSON.parse(metaContent);
+  const metaContent = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
+  const { formData, rows } = JSON.parse(metaContent);
 
-//         if (!formData || Object.keys(formData).length === 0)
-//           throw new Error("formData empty!");
+  if (!formData || !formData.location)
+    throw new Error("formData.location missing!");
 
-//   const sig1 = files.find(f => f.originalname.startsWith("signavih1"));
-//   const images = files.filter(f => !f.originalname.startsWith("signavih"));
+  const sig1 = files.find(f => f.originalname.startsWith("signavih1"));
+  const images = files.filter(f =>
+    !f.originalname.startsWith("signavih") &&
+    !f.originalname.startsWith("meta")
+  );
 
+  const BASE_URL = "https://backendvdocs.duckdns.org";
 
-//     const BASE_URL = "https://backendvdocs.duckdns.org";
+  // Map từng ảnh đúng từng row → gán vào row.qr
+  for (let i = 0; i < rows.length; i++) {
+    const img = images[i];
 
-//   for (let i = 0; i < rows.length; i++) {
-//     const img = images[i];
+    if (img) {
+      const pubUrl = `${BASE_URL}/uploads/${type}/${batch}/${img.filename}`;
+      rows[i].qr = pubUrl;
+      console.log("OFFLOAD QR:", pubUrl);
+    } else {
+      rows[i].qr = "";
+    }
+  }
 
-//     if (img) {
-//       const publicUrl = `${BASE_URL}/uploads/${type}/${batch}/${img.filename}`;
-//       rows[i].qr = publicUrl;
+  // DÙNG location CHO OFFLOAD
+  const pdfPath = path.join(targetDir, `${formData.location}.pdf`);
 
-//       console.log(`ROW ${i} QR URL:`, publicUrl);
-//     } else {
-//       rows[i].qr = "";
-//     }
-//   }
+  await generateOffloadPDF({
+    formData,
+    rows,
+    images,
+    signavih: { sig1 },
+    outputPath: pdfPath,
+  });
 
+  const stat = await fs.promises.stat(pdfPath);
 
-//   const pdfPath = path.join(targetDir, `${formData.trans}.pdf`);
+  await File.create({
+    filename: `${formData.location}.pdf`,
+    path: `/${type}/${batch}/${formData.location}.pdf`,
+    mimetype: "application/pdf",
+    size: stat.size,
+    uploadedBy: files[0].uploadedBy,
+    department: files[0].department,
+    targetDept: files[0].targetDept,
+    batch,
+  });
 
-//   await generateOffloadPDF({
-//     formData,
-//     rows,
-//     images,
-//     signavih: { sig1 },
-//     outputPath: pdfPath,
-//   });
-//   console.log("FOUND SIG1:", sig1?.tmpPath);
+  // LƯU ảnh
+  const filesToUpload = files.filter(
+    f => !f.originalname.startsWith("meta") &&
+         !f.originalname.startsWith("signavih1")
+  );
 
-//   const stat = await fs.promises.stat(pdfPath);
-//   const finalOffloadName = `${formData.trans}.pdf`;
-//   await File.create({
-//     filename: finalOffloadName,
-//     path: `/${type}/${batch}/${formData.trans}.pdf`,
-//     mimetype: "application/pdf",
-//     size: stat.size,
-//     uploadedBy: files[0].uploadedBy,
-//     department: files[0].department,
-//     targetDept: files[0].targetDept,
-//     batch,
-//   });
-//   const filesToUpload = files.filter(f => !f.originalname.startsWith("meta") && !f.originalname.startsWith("signavih1"))
-//       for (const f of filesToUpload) {
-//       const finalPath = path.join(targetDir, f.filename);
-//       await fs.promises.rename(f.tmpPath, finalPath);
+  for (const f of filesToUpload) {
+    const finalPath = path.join(targetDir, f.filename);
+    await fs.promises.rename(f.tmpPath, finalPath);
 
-//       const relativePath = finalPath
-//         .replace(BASE_DIR, "")
-//         .replace(/\\/g, "/");
-
-//       await File.create({
-//         filename: f.originalname,
-//         path: relativePath,
-//         mimetype: f.mimetype,
-//         size: f.size,
-//         uploadedBy: f.uploadedBy,
-//         department: f.department,
-//         targetDept: f.targetDept,
-//         batch,
-//       });
-//       console.log("ALL FILES RECEIVED:");
-//       files.forEach(f => console.log(" - ", f.originalname));
-//       console.log("formData received:", formData);
-//     }
-// }
+    await File.create({
+      filename: f.originalname,
+      path: finalPath.replace(BASE_DIR, "").replace(/\\/g, "/"),
+      mimetype: f.mimetype,
+      size: f.size,
+      uploadedBy: f.uploadedBy,
+      department: f.department,
+      targetDept: f.targetDept,
+      batch,
+    });
+  }
+}
 
     process.send({ success: true });
     process.exit(0);
