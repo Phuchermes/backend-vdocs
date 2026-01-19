@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { generateULDPDF } = require("../services/offloadPdf");
+const { generateOffloadPDF } = require("../services/offloadPdf");
 
 exports.createOffload = async (req, res) => {
   try {
@@ -19,7 +19,7 @@ exports.createOffload = async (req, res) => {
     fs.mkdirSync(baseDir, { recursive: true });
 
     //  Generate PDF
-    await generateULDPDF({
+    await generateOffloadPDF({
       formData,
       checkboxes,
       signavih: {
