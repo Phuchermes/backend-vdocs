@@ -373,7 +373,6 @@ console.log("FOUND SIG2:", sig2?.tmpPath);
 //     }
 // }
 
-
     process.send({ success: true });
     process.exit(0);
   } catch (err) {
