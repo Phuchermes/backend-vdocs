@@ -42,7 +42,7 @@ exports.generateOffloadPDF = async ({
     // Header info
  page.drawText(safeText(formData.location), {
     x: 330,
-    y: height - 133,
+    y: height - 132,
     size: FONT_SIZE,
     font,
     color: rgb(0, 0, 0),
@@ -50,14 +50,28 @@ exports.generateOffloadPDF = async ({
 
   page.drawText(safeText(formData.day), {
     x: 420,
-    y: height - 133,
+    y: height - 132,
+    size: FONT_SIZE,
+    font,
+  });
+
+  page.drawText(safeText("/"), {
+    x: 425,
+    y: height - 132,
     size: FONT_SIZE,
     font,
   });
 
   page.drawText(safeText(formData.month), {
     x: 440,
-    y: height - 133,
+    y: height - 132,
+    size: FONT_SIZE,
+    font,
+  });
+
+  page.drawText(safeText("/"), {
+    x: 445,
+    y: height - 132,
     size: FONT_SIZE,
     font,
   });
