@@ -311,7 +311,7 @@ if (type === "offload") {
     !f.originalname.startsWith("meta")
   );
 
-  const BASE_URL = "http://192.168.1.56:3000";
+  const BASE_URL = "https://backendvdocs.duckdns.org";
 
   // Map từng ảnh đúng từng row → gán vào row.qr
   for (let i = 0; i < rows.length; i++) {
