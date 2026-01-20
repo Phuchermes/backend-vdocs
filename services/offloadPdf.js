@@ -75,7 +75,7 @@ exports.generateOffloadPDF = async ({
     height - 300,
     height - 350,
     height - 386,
-    height - 438,
+    height - 436,
     height - 480,
     height - 520,
   ];
@@ -120,7 +120,7 @@ exports.generateOffloadPDF = async ({
 
     // 🔥 QR
 if (row.qr) {
-      await drawQRCentered(row.qr, 556, y, 32);
+      await drawQRCentered(row.qr, 558, y, 32);
     }
 
     drawTextCentered(row.end, 620, y);
@@ -132,7 +132,7 @@ if (row.qr) {
         fs.readFileSync(signavih.sig1.tmpPath)
       );
       page.drawImage(img, {
-        x: 640,
+        x: 645,
         y: y - 18,
         width: img.width * 0.05,
         height: img.height * 0.05,
