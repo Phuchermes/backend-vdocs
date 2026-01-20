@@ -126,7 +126,7 @@ exports.generateOffloadPDF = async ({
     drawTextCentered(row.notice, 40, y);
     drawTextCentered(row.tnotice, 120, y);
     drawTextCentered(row.uldno, 180, y);
-    drawTextCentered(row.pos, 300, y);
+    drawTextCentered(row.pos, 303, y);
     drawTextCentered(row.offtag, 405, y, 25);
 
     // 🔥 QR
