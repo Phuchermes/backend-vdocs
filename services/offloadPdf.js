@@ -49,7 +49,7 @@ exports.generateOffloadPDF = async ({
   });
 
   page.drawText(safeText(formData.day), {
-    x: 420,
+    x: 419,
     y: height - 132,
     size: FONT_SIZE,
     font,
