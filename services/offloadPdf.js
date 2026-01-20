@@ -41,8 +41,8 @@ exports.generateOffloadPDF = async ({
     // Header info
       page.drawText(safeText(formData.location), { x: 330, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
       page.drawText(safeText(formData.day), { x: 420, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
-      page.drawText(safeText(formData.month), { x: 425, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
-      page.drawText(safeText(formData.year), { x: 430, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
+      page.drawText(safeText(formData.month), { x: 430, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
+      page.drawText(safeText(formData.year), { x: 440, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
 
       // Draw each passenger + signatures
       for (let i = 0; i < rows.length; i++) {
@@ -58,7 +58,7 @@ exports.generateOffloadPDF = async ({
       if (row.qr) {
         const qrBase64 = await QRCode.toDataURL(row.qr);
         const img = await pdfDoc.embedPng(Buffer.from(qrBase64.split(",")[1], "base64"));
-        page.drawImage(img, {x: 560, y: baseY, width: img.width * 0.15, height: img.height * 0.15});
+        page.drawImage(img, {x: 560, y: baseY, width: img.width * 0.35, height: img.height * 0.35});
       }
 
         page.drawText(safeText(row.end), { x: 620, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
