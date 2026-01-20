@@ -134,7 +134,7 @@ if (row.qr) {
       await drawQRCentered(row.qr, 560, y, 39);
     }
 
-    drawTextCentered(row.end, 620, y);
+    drawTextCentered(row.end, 618, y);
     drawTextCentered(row.note, 720, y);
 
     // Signature (DVSD)
