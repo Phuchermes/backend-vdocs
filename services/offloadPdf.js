@@ -56,7 +56,7 @@ exports.generateOffloadPDF = async ({
   });
 
   page.drawText(safeText("/"), {
-    x: 434,
+    x: 435,
     y: height - 132,
     size: FONT_SIZE,
     font,
@@ -70,7 +70,7 @@ exports.generateOffloadPDF = async ({
   });
 
   page.drawText(safeText("/"), {
-    x: 454,
+    x: 455,
     y: height - 132,
     size: FONT_SIZE,
     font,
