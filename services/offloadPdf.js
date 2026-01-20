@@ -53,7 +53,7 @@ exports.generateOffloadPDF = async ({
         page.drawText(safeText(row.tnotice), { x: 120, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.uldno), { x: 180, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.pos), { x: 290, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.offtag), { x: 350, y: baseX, size: 20, font, color: rgb(0,0,0) });
+        page.drawText(safeText(row.offtag), { x: 400, y: baseX, size: 22, font, color: rgb(0,0,0) });
 
       if (row.qr) {
         const qrBase64 = await QRCode.toDataURL(row.qr);
