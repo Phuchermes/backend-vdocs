@@ -120,7 +120,7 @@ exports.generateOffloadPDF = async ({
 
     // 🔥 QR
 if (row.qr) {
-      await drawQRCentered(row.qr, 560, y, 32);
+      await drawQRCentered(row.qr, 560, y, 40);
     }
 
     drawTextCentered(row.end, 620, y);
@@ -133,7 +133,7 @@ if (row.qr) {
       );
       page.drawImage(img, {
         x: 650,
-        y: y - 20,
+        y: y - 15,
         width: img.width * 0.06,
         height: img.height * 0.06,
       });
