@@ -112,13 +112,13 @@ exports.generateOffloadPDF = async ({
     fontSize: 15,
   });
 
-  drawTextCentered({ text: formData.day, x: 420, centerY: height - 133, fontSize: 15 });
-  drawTextCentered({ text: formData.month, x: 440, centerY: height - 133, fontSize: 15 });
-  drawTextCentered({ text: formData.year, x: 460, centerY: height - 133, fontSize: 15 });
+  drawTextCentered({ text: formData.day, x: 420, centerY: height - 125, fontSize: 15 });
+  drawTextCentered({ text: formData.month, x: 440, centerY: height - 125, fontSize: 15 });
+  drawTextCentered({ text: formData.year, x: 460, centerY: height - 125, fontSize: 15 });
 
       // Draw each passenger + signatures
   const ROW_HEIGHT = 60;
-  const FIRST_ROW_CENTER_Y = height - 250;
+  const FIRST_ROW_CENTER_Y = height - 240;
 
   for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
@@ -156,7 +156,7 @@ exports.generateOffloadPDF = async ({
       scale: 0.05,
     });
   }
-  
+
     const form = pdfDoc.getForm();
     form.flatten();
         
