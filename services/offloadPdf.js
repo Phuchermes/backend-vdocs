@@ -115,12 +115,9 @@ exports.generateOffloadPDF = async ({
     drawTextCentered(row.pos, 290, y);
     drawTextCentered(row.offtag, 400, y, 22);
 
-    // 🔥 Số tag to hơn nhưng vẫn CENTER
-    drawTextCentered(row.offtag, 400, y, 22);
-
     // 🔥 QR
 if (row.qr) {
-      await drawQRCentered(row.qr, 560, y, 40);
+      await drawQRCentered(row.qr, 560, y, 35);
     }
 
     drawTextCentered(row.end, 620, y);
@@ -133,7 +130,7 @@ if (row.qr) {
       );
       page.drawImage(img, {
         x: 650,
-        y: y - 15,
+        y: y - 30,
         width: img.width * 0.06,
         height: img.height * 0.06,
       });
