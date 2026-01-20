@@ -32,56 +32,131 @@ exports.generateOffloadPDF = async ({
   const font = await pdfDoc.embedFont(fontBytes, { subset: false });
 
   const page = pdfDoc.getPages()[0];
-  const { width, height } = page.getSize();
-  console.log(width, height); 
-    const fontSize = 15;
-      const safeText = (v) =>
-    typeof v === "string" ? v : v != null ? String(v) : "";
+  const { height } = page.getSize();
+  console.log(height); 
+
+  const COLOR = rgb(0,0,0);
+  const fontSize = 15;
+  const safeText = (v) => typeof v === "string" ? v : v != null ? String(v) : "";
+
+   const drawTextCentered = ({
+    text,
+    x,
+    centerY,
+    fontSize,
+  }) => {
+    if (!text) return;
+
+    const textHeight = font.heightAtSize(fontSize);
+    const y = centerY - textHeight / 2;
+
+    page.drawText(safeText(text), {
+      x,
+      y,
+      size: fontSize,
+      font,
+      color: COLOR,
+    });
+  };
+
+  const drawQRCodeCentered = async ({
+    value,
+    x,
+    centerY,
+    size = 36,
+  }) => {
+    if (!value) return;
+
+    const qrBase64 = await QRCode.toDataURL(value);
+    const img = await pdfDoc.embedPng(
+      Buffer.from(qrBase64.split(",")[1], "base64")
+    );
+
+    page.drawImage(img, {
+      x,
+      y: centerY - size / 2,
+      width: size,
+      height: size,
+    });
+  };
+
+  const drawSignatureCentered = ({
+    tmpPath,
+    x,
+    centerY,
+    scale = 0.05,
+  }) => {
+    if (!tmpPath || !fs.existsSync(tmpPath)) return;
+
+    const img = fs.readFileSync(tmpPath);
+    return pdfDoc.embedPng(img).then((png) => {
+      const w = png.width * scale;
+      const h = png.height * scale;
+
+      page.drawImage(png, {
+        x,
+        y: centerY - h / 2,
+        width: w,
+        height: h,
+      });
+    });
+  };
+
+
 
     // Header info
-      page.drawText(safeText(formData.location), { x: 330, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
-      page.drawText(safeText(formData.day), { x: 420, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
-      page.drawText(safeText(formData.month), { x: 440, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
-      page.drawText(safeText(formData.year), { x: 460, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
+      drawTextCentered({
+    text: formData.location,
+    x: 330,
+    centerY: height - 133,
+    fontSize: 15,
+  });
+
+  drawTextCentered({ text: formData.day, x: 420, centerY: height - 133, fontSize: 15 });
+  drawTextCentered({ text: formData.month, x: 440, centerY: height - 133, fontSize: 15 });
+  drawTextCentered({ text: formData.year, x: 460, centerY: height - 133, fontSize: 15 });
 
       // Draw each passenger + signatures
-      const rowHeight = 60;
-      const startY = height - 220;
+  const ROW_HEIGHT = 60;
+  const FIRST_ROW_CENTER_Y = height - 250;
 
-      for (let i = 0; i < rows.length; i++) {
-        const row = rows[i];
-        const rowY = startY - i * rowHeight;
-        const textY = rowY + 12;
-        page.drawText(safeText(row.notice), { x: 40, y: textY, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.tnotice), { x: 120, y: textY, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.uldno), { x: 180, y: textY, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.pos), { x: 290, y: textY, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.offtag), { x: 400, y: textY, size: 22, font, color: rgb(0,0,0) });
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const centerY = FIRST_ROW_CENTER_Y - i * ROW_HEIGHT;
 
-      if (row.qr) {
-        const qrBase64 = await QRCode.toDataURL(row.qr);
-        const img = await pdfDoc.embedPng(Buffer.from(qrBase64.split(",")[1], "base64"));
-        const qrSize = 30;
-        page.drawImage(img, {x: 556, y: rowY, width: qrSize, height: qrSize});
-      }
+    drawTextCentered({ text: row.notice, x: 40, centerY, fontSize: 15 });
+    drawTextCentered({ text: row.tnotice, x: 120, centerY, fontSize: 15 });
+    drawTextCentered({ text: row.uldno, x: 180, centerY, fontSize: 15 });
+    drawTextCentered({ text: row.pos, x: 290, centerY, fontSize: 15 });
 
-        page.drawText(safeText(row.end), { x: 620, y: textY, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.note), { x: 720, y: textY, size: fontSize, font, color: rgb(0,0,0) });
+    // 🔥 Số tag to hơn nhưng vẫn CENTER
+    drawTextCentered({
+      text: row.offtag,
+      x: 400,
+      centerY,
+      fontSize: 22,
+    });
 
-        // Draw NV1 signature
-        if (signavih?.sig1?.tmpPath) {
-          const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig1.tmpPath));
-          page.drawImage(img, { x: 640, y: rowY , width: 30, height: 20 });
-          console.log("SIG1 PATH:", signavih.sig1.tmpPath);
-        }
+    // 🔥 QR
+    await drawQRCodeCentered({
+      value: row.qr,
+      x: 556,
+      centerY,
+      size: 36,
+    });
 
-        // // Draw NV2 signature
-        // if (signavih?.sig2?.tmpPath) {
-        //   const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig2.tmpPath));
-        //   page.drawImage(img, { x: 570, y: baseY, width: img.width * 0.07, height: img.height * 0.07 });
-        //   console.log("SIG2 PATH:", signavih.sig2.tmpPath);
-        // }
-    }
+    drawTextCentered({ text: row.end, x: 620, centerY, fontSize: 15 });
+    drawTextCentered({ text: row.note, x: 720, centerY, fontSize: 15 });
+
+    // 🔥 Signature NV
+    await drawSignatureCentered({
+      tmpPath: signavih?.sig1?.tmpPath,
+      x: 640,
+      centerY,
+      scale: 0.05,
+    });
+  }
+  
     const form = pdfDoc.getForm();
     form.flatten();
         
