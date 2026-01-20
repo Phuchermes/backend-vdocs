@@ -41,8 +41,8 @@ exports.generateOffloadPDF = async ({
     // Header info
       page.drawText(safeText(formData.location), { x: 330, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
       page.drawText(safeText(formData.day), { x: 420, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
-      page.drawText(safeText(formData.month), { x: 430, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
-      page.drawText(safeText(formData.year), { x: 440, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
+      page.drawText(safeText(formData.month), { x: 450, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
+      page.drawText(safeText(formData.year), { x: 500, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
 
       // Draw each passenger + signatures
       for (let i = 0; i < rows.length; i++) {
