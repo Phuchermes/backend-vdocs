@@ -16,7 +16,7 @@ const QRCode = require("qrcode");
 exports.generateOffloadPDF = async ({
   formData,
   rows,
-  signavih,
+  signoffload,
   outputPath,
 }) => {
 
@@ -129,8 +129,8 @@ exports.generateOffloadPDF = async ({
     drawTextCentered(row.pos, 303, y);
     drawTextCentered(row.offtag, 405, y, 25);
 
-    // 🔥 QR
-if (row.qr) {
+    // QR
+  if (row.qr) {
       await drawQRCentered(row.qr, 560, y, 39);
     }
 
@@ -138,10 +138,8 @@ if (row.qr) {
     drawTextCentered(row.note, 720, y);
 
     // Signature (DVSD)
-    if (signavih?.sig1?.tmpPath) {
-      const img = await pdfDoc.embedPng(
-        fs.readFileSync(signavih.sig1.tmpPath)
-      );
+    if (signoffload?.sig1?.tmpPath) {
+      const img = await pdfDoc.embedPng(fs.readFileSync(signoffload.sig1.tmpPath));
       page.drawImage(img, {
         x: 650,
         y: y - 40,

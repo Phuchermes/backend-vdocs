@@ -305,9 +305,9 @@ if (type === "offload") {
   if (!formData || !formData.location)
     throw new Error("formData.location missing!");
 
-  const sig1 = files.find(f => f.originalname.startsWith("signavih1"));
+  const sig1 = files.find(f => f.originalname.startsWith("signoffload"));
   const images = files.filter(f =>
-    !f.originalname.startsWith("signavih") &&
+    !f.originalname.startsWith("signoffload") &&
     !f.originalname.startsWith("meta")
   );
 
@@ -333,7 +333,7 @@ if (type === "offload") {
     formData,
     rows,
     images,
-    signavih: { sig1 },
+    signoffload: { sig1 },
     outputPath: pdfPath,
   });
 
@@ -353,7 +353,7 @@ if (type === "offload") {
   // LƯU ảnh
   const filesToUpload = files.filter(
     f => !f.originalname.startsWith("meta") &&
-         !f.originalname.startsWith("signavih1")
+         !f.originalname.startsWith("signoffload")
   );
 
   for (const f of filesToUpload) {

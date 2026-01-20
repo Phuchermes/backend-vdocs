@@ -22,8 +22,8 @@ exports.createOffload = async (req, res) => {
     await generateOffloadPDF({
       formData,
       checkboxes,
-      signavih: {
-        sig1: req.files.signavih1?.[0],
+      signoffload: {
+        sig1: req.files.signoffload?.[0],
       },
       outputPath: path.join(baseDir, "offload.pdf"),
     });
