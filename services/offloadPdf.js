@@ -48,25 +48,25 @@ exports.generateOffloadPDF = async ({
       for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
         const baseX = height - 200 - i * 60;
-        const baseY = height - 300 - i * 60;
+        const baseY = height - 350 - i * 60;
         page.drawText(safeText(row.notice), { x: 40, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.tnotice), { x: 120, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.uldno), { x: 180, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.pos), { x: 250, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.offtag), { x: 300, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
+        page.drawText(safeText(row.offtag), { x: 380, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
       if (row.qr) {
         const qrBase64 = await QRCode.toDataURL(row.qr);
         const img = await pdfDoc.embedPng(Buffer.from(qrBase64.split(",")[1], "base64"));
 
-        page.drawImage(img, {x: 650, y: baseY, width: 60,height: 60});
+        page.drawImage(img, {x: 450, y: baseY, width: 60,height: 60});
       }
-        page.drawText(safeText(row.end), { x: 750, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.note), { x: 850, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
+        page.drawText(safeText(row.end), { x: 550, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
+        page.drawText(safeText(row.note), { x: 650, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
 
         // Draw NV1 signature
         if (signavih?.sig1?.tmpPath) {
           const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig1.tmpPath));
-          page.drawImage(img, { x: 980, y: baseY , width: img.width * 0.07, height: img.height * 0.07 });
+          page.drawImage(img, { x: 680, y: baseY , width: img.width * 0.07, height: img.height * 0.07 });
           console.log("SIG1 PATH:", signavih.sig1.tmpPath);
         }
 
