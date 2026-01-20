@@ -48,7 +48,7 @@ exports.generateOffloadPDF = async ({
       for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
         const baseX = height - 220 - i * 60;
-        const baseY = height - 238 - i * 60;
+        const baseY = height - 236 - i * 60;
         page.drawText(safeText(row.notice), { x: 40, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.tnotice), { x: 120, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.uldno), { x: 180, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
