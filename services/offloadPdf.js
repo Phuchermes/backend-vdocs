@@ -40,9 +40,9 @@ exports.generateOffloadPDF = async ({
 
     // Header info
       page.drawText(safeText(formData.location), { x: 330, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
-      page.drawText(safeText(formData.day), { x: 450, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
-      page.drawText(safeText(formData.month), { x: 480, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
-      page.drawText(safeText(formData.year), { x: 510, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
+      page.drawText(safeText(formData.day), { x: 420, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
+      page.drawText(safeText(formData.month), { x: 425, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
+      page.drawText(safeText(formData.year), { x: 430, y: height - 133, size: fontSize, font, color: rgb(0,0,0) });
 
       // Draw each passenger + signatures
       for (let i = 0; i < rows.length; i++) {
@@ -52,21 +52,21 @@ exports.generateOffloadPDF = async ({
         page.drawText(safeText(row.notice), { x: 40, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.tnotice), { x: 120, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.uldno), { x: 180, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.pos), { x: 300, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.offtag), { x: 320, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
+        page.drawText(safeText(row.pos), { x: 290, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
+        page.drawText(safeText(row.offtag), { x: 350, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
       if (row.qr) {
         const qrBase64 = await QRCode.toDataURL(row.qr);
         const img = await pdfDoc.embedPng(Buffer.from(qrBase64.split(",")[1], "base64"));
 
         page.drawImage(img, {x: 560, y: baseY, width: 60,height: 60});
       }
-        page.drawText(safeText(row.end), { x: 580, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.note), { x: 680, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
+        page.drawText(safeText(row.end), { x: 620, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
+        page.drawText(safeText(row.note), { x: 720, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
 
         // Draw NV1 signature
         if (signavih?.sig1?.tmpPath) {
           const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig1.tmpPath));
-          page.drawImage(img, { x: 600, y: baseY , width: img.width * 0.07, height: img.height * 0.07 });
+          page.drawImage(img, { x: 640, y: baseY , width: img.width * 0.07, height: img.height * 0.07 });
           console.log("SIG1 PATH:", signavih.sig1.tmpPath);
         }
 
