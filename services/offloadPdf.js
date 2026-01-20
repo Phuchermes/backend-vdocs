@@ -77,7 +77,7 @@ exports.generateOffloadPDF = async ({
     height - 389,
     height - 433,
     height - 478,
-    height - 520,
+    height - 522,
   ];
 
     const drawTextCentered = (text, x, centerY, size = FONT_SIZE) => {
