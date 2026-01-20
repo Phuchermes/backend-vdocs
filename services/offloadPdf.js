@@ -58,7 +58,7 @@ exports.generateOffloadPDF = async ({
       if (row.qr) {
         const qrBase64 = await QRCode.toDataURL(row.qr);
         const img = await pdfDoc.embedPng(Buffer.from(qrBase64.split(",")[1], "base64"));
-        page.drawImage(img, {x: 556, y: baseX, width: img.width * 0.22, height: img.height * 0.19});
+        page.drawImage(img, {x: 556, y: baseX, width: img.width * 0.22, height: img.height * 0.22});
       }
 
         page.drawText(safeText(row.end), { x: 620, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
@@ -67,7 +67,7 @@ exports.generateOffloadPDF = async ({
         // Draw NV1 signature
         if (signavih?.sig1?.tmpPath) {
           const img = await pdfDoc.embedPng(fs.readFileSync(signavih.sig1.tmpPath));
-          page.drawImage(img, { x: 640, y: baseY , width: img.width * 0.07, height: img.height * 0.05 });
+          page.drawImage(img, { x: 640, y: baseY , width: img.width * 0.05, height: img.height * 0.05 });
           console.log("SIG1 PATH:", signavih.sig1.tmpPath);
         }
 
