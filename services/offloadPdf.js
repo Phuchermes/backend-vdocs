@@ -117,7 +117,7 @@ exports.generateOffloadPDF = async ({
 
     // 🔥 QR
 if (row.qr) {
-      await drawQRCentered(row.qr, 560, y, 38);
+      await drawQRCentered(row.qr, 560, y, 40);
     }
 
     drawTextCentered(row.end, 620, y);
