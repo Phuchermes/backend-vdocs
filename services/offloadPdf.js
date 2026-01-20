@@ -117,8 +117,8 @@ exports.generateOffloadPDF = async ({
   drawTextCentered({ text: formData.year, x: 460, centerY: height - 125, fontSize: 15 });
 
       // Draw each passenger + signatures
-  const ROW_HEIGHT = 60;
-  const FIRST_ROW_CENTER_Y = height - 240;
+  const ROW_HEIGHT = 50;
+  const FIRST_ROW_CENTER_Y = height - 200;
 
   for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
