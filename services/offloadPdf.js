@@ -70,14 +70,14 @@ exports.generateOffloadPDF = async ({
   });
       // Draw each passenger + signatures
    const ROW_CENTER_Y = [
-    height - 150,
+    height - 180,
     height - 260,
-    height - 370,
-    height - 480,
-    height - 590,
-    height - 600,
-    height - 710,
-    height - 800,
+    height - 280,
+    height - 300,
+    height - 320,
+    height - 350,
+    height - 380,
+    height - 400,
   ];
 
     const drawTextCentered = (text, x, centerY, size = FONT_SIZE) => {
