@@ -73,7 +73,7 @@ exports.generateOffloadPDF = async ({
     height - 215,
     height - 258,
     height - 302,
-    height - 346,
+    height - 345,
     height - 389,
     height - 433,
     height - 478,
