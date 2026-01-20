@@ -62,11 +62,11 @@ exports.generateOffloadPDF = async ({
         const qrBase64 = await QRCode.toDataURL(row.qr);
         const img = await pdfDoc.embedPng(Buffer.from(qrBase64.split(",")[1], "base64"));
         const qrSize = 30;
-        page.drawImage(img, {x: 556, y: baseY, width: qrSize, height: qrSize});
+        page.drawImage(img, {x: 556, y: rowY, width: qrSize, height: qrSize});
       }
 
-        page.drawText(safeText(row.end), { x: 620, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
-        page.drawText(safeText(row.note), { x: 720, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
+        page.drawText(safeText(row.end), { x: 620, y: textY, size: fontSize, font, color: rgb(0,0,0) });
+        page.drawText(safeText(row.note), { x: 720, y: textY, size: fontSize, font, color: rgb(0,0,0) });
 
         // Draw NV1 signature
         if (signavih?.sig1?.tmpPath) {
