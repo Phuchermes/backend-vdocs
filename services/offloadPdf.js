@@ -47,7 +47,7 @@ exports.generateOffloadPDF = async ({
       // Draw each passenger + signatures
       for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
-        const baseX = height - 200 - i * 60;
+        const baseX = height - 220 - i * 60;
         const baseY = height - 400 - i * 60;
         page.drawText(safeText(row.notice), { x: 40, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.tnotice), { x: 120, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
@@ -58,7 +58,7 @@ exports.generateOffloadPDF = async ({
         const qrBase64 = await QRCode.toDataURL(row.qr);
         const img = await pdfDoc.embedPng(Buffer.from(qrBase64.split(",")[1], "base64"));
 
-        page.drawImage(img, {x: 560, y: baseY, width: 60,height: 60});
+        page.drawImage(img, {x: 560, y: baseY, width: img.width * 0.07, height: img.height * 0.07});
       }
         page.drawText(safeText(row.end), { x: 620, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
         page.drawText(safeText(row.note), { x: 720, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
