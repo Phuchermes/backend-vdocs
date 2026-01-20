@@ -58,7 +58,7 @@ exports.generateOffloadPDF = async ({
       if (row.qr) {
         const qrBase64 = await QRCode.toDataURL(row.qr);
         const img = await pdfDoc.embedPng(Buffer.from(qrBase64.split(",")[1], "base64"));
-        page.drawImage(img, {x: 550, y: baseY, width: img.width * 0.25, height: img.height * 0.25});
+        page.drawImage(img, {x: 555, y: baseY, width: img.width * 0.22, height: img.height * 0.22});
       }
 
         page.drawText(safeText(row.end), { x: 620, y: baseX, size: fontSize, font, color: rgb(0,0,0) });
