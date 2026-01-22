@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const Document = require("../models/Document");
 
-const BASE_DIR = path.join(__dirname, "../uploads/documents");
+const BASE_DIR = path.join(__dirname, "../uploads");
 let mongoReady = false;
 
 async function initDB() {
