@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 
-const socket = io("http://192.168.1.76:8000");
+const socket = io("https://backendvdocs.duckdns.org");
 
 // Join room theo department
 socket.emit("joinDepartment", user.department);
