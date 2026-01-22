@@ -4,7 +4,7 @@ const path = require("path");
 function runUploadWorker(job) {
   return new Promise((resolve, reject) => {
     const worker = fork(
-      path.join(__dirname, "../workers/uploadWorker.js"),
+      path.join(__dirname, "../workers/uploadDispatcher.js"),
       [],
       { env: process.env, stdio: ["inherit", "inherit", "inherit", "ipc"] }
     );
