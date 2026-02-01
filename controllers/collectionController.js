@@ -39,7 +39,7 @@ exports.saveFile = async (req, res) => {
       path: relativePath,
       mimetype: req.file.mimetype,
       size: req.file.size,
-      uploadedBy: req.user._id,
+      uploadedBy: req.user.id,
       department: req.user.department
     });
 

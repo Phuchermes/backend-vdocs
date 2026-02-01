@@ -7,7 +7,7 @@ const { runUploadWorker } = require("../services/uploadQueue");
 
 // ===== CONSTANTS =====
 const BASE_DIR = path.join(__dirname, "../uploads");
-const SUB_FOLDERS = ["avih", "irregular", "uld", "kh", "offload"];
+const SUB_FOLDERS = ["avih", "irregular", "uld", "kh", "offload", "report35"];
 
 // ===== INIT BASE FOLDERS (STARTUP ONLY) =====
 if (!fs.existsSync(BASE_DIR)) fs.mkdirSync(BASE_DIR);
@@ -79,6 +79,7 @@ exports.saveFile = async (req, res) => {
     const type = req.query.type;
     const userDept = req.user.department;
 
+
     // ===== TARGET DEPT LOGIC (GIỮ NGUYÊN NGHIỆP VỤ) =====
     let targetDept = userDept;
 
@@ -89,13 +90,15 @@ exports.saveFile = async (req, res) => {
     } else if (type === "kh") {
       targetDept = userDept === "HDCX" ? "KH" : "HDCX";
     }
+    else if (type === "report35") {
+      targetDept = userDept === "HDCX" ? "HDCX" : "HDCX";
+    }
     
 
-    const batch = req.uploadBatch || Date.now();
+    const batch = String(req.uploadBatch || Date.now());
     const savedFiles = [];
 
-/* ===== CHUẨN HÓA DATA GỬI WORKER ===== */
-    const files = req.files.map(file => ({
+      const files = req.files.map(file => ({
       tmpPath: file.path,
       filename: file.filename,
       originalname: file.originalname,
@@ -103,8 +106,14 @@ exports.saveFile = async (req, res) => {
       size: file.size,
       targetDept,
       department: userDept,
-      uploadedBy: req.user._id,
+      uploadedBy: req.user.id,
+      batch,
     }));
+//     console.log("REQ USER:", req.user);
+// console.log("UPLOADED BY:", req.user.id);
+
+/* ===== CHUẨN HÓA DATA GỬI WORKER ===== */
+
 
     let meta;
 
@@ -123,6 +132,13 @@ if (type === "avih") {
 }
 
 if (type === "offload") {
+  meta = {
+    formData: req.body.formData,
+    rows: req.body.rows,
+  };
+}
+
+if (type === "report35") {
   meta = {
     formData: req.body.formData,
     rows: req.body.rows,
@@ -148,6 +164,7 @@ if (type === "kh") {
     await runUploadWorker({
       files,
       type,
+      department: req.user.department,
       batch,
       meta, 
     }).catch(err => {
@@ -173,9 +190,11 @@ exports.getFiles = async (req, res) => {
     const dept = req.user.department;
 
     const files = await File.find({
+      deletedAt: null,
       $or: [
-        { uploadedBy: req.user._id },
+        { uploadedBy: req.user.id },
         { targetDept: dept },
+        { department: dept }
       ],
     }).sort({ createdAt: -1 });
 
@@ -195,7 +214,7 @@ exports.downloadFile = async (req, res) => {
 
     // phân quyền
     if (
-      fileDoc.uploadedBy.toString() !== req.user._id.toString() &&
+      fileDoc.uploadedBy.toString() !== req.user.id.toString() &&
       fileDoc.targetDept !== dept
     ) {
       return res.status(403).json({ message: "No permission" });
@@ -222,8 +241,9 @@ exports.getFilesByBatch = async (req, res) => {
     const files = await File.find({
       batch,
       $or: [
-        { uploadedBy: req.user._id },
+        { uploadedBy: req.user.id },
         { targetDept: dept },
+        { department: dept },
       ],
     }).sort({ createdAt: 1 });
 
@@ -236,27 +256,78 @@ exports.getFilesByBatch = async (req, res) => {
 
 exports.deleteFile = async (req, res) => {
   try {
-    const fileDoc = await File.findById(req.params.id);
-    if (!fileDoc) return res.status(404).json({ message: "Not found" });
+    const file = await File.findById(req.params.id);
+    if (!file) return res.status(404).json({ msg: "File not found" });
 
-    // chỉ người upload mới được xóa
-    if (fileDoc.uploadedBy.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: "No permission" });
-    }
+    if (file.uploadedBy.toString() !== req.user.id)
+      return res.status(403).json({ msg: "No permission" });
 
-    const absPath = path.join(BASE_DIR, fileDoc.path);
+    await File.deleteOne({ _id: file._id });
 
-    if (fs.existsSync(absPath)) {
-      await fs.promises.unlink(absPath);
-    }
-
-    await fileDoc.deleteOne();
-
-    res.json({ success: true });
+    res.json({ ok: true, msg: "Deleted from Mongo only" });
   } catch (err) {
-    console.error("Delete error:", err);
-    res.status(500).json({ message: "Server error" });
+    console.error("DELETE ERROR:", err);
+    res.status(500).json({ msg: "Delete failed" });
   }
 };
 
+exports.deleteBatch = async (req, res) => {
+  const { batch } = req.params;
 
+  await File.updateMany(
+    {
+      $or: [
+        { batch: String(batch) },
+        { path: new RegExp(`/${batch}/`, "g") }
+      ]
+    },
+    { deletedAt: new Date() }
+  );
+
+  res.json({ ok: true, msg: "Batch soft deleted" });
+};
+
+exports.listDeletedBatches = async (req, res) => {
+  const batches = await File.aggregate([
+    { $match: { deletedAt: { $ne: null } } },
+    { $group: { _id: "$batch", count: { $sum: 1 } } },
+    { $project: { batch: "$_id", count: 1, _id: 0 } },
+  ]);
+
+  res.json(batches);
+};
+
+exports.restoreBatch = async (req, res) => {
+  const { batch } = req.params;
+
+  await File.updateMany(
+    {
+      $or: [
+        { batch: String(batch) },
+        { path: new RegExp(`/${batch}/`) }
+      ],
+      deletedAt: { $ne: null }
+    },
+    { $unset: { deletedAt: "" } }
+  );
+
+  res.json({ ok: true, msg: "Batch restored" });
+};
+
+exports.hardDeleteBatch = async (req, res) => {
+  const { batch } = req.params;
+
+  const result = await File.deleteMany({
+    $or: [
+      { batch: String(batch) },
+      { batch: Number(batch) },
+      { path: new RegExp(`/${batch}/`) },
+    ],
+  });
+
+  res.json({
+    ok: true,
+    deleted: result.deletedCount,
+    msg: "DB records permanently removed, disk untouched",
+  });
+};

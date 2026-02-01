@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "backendvdocs",
+      name: "vdocs-server",
       script: "./index.js",
       cwd: "/var/www/backend-vdocs",
       
@@ -20,8 +20,8 @@ module.exports = {
 
       merge_logs: true,
       log_date_format: "YYYY-MM-DD HH:mm:ss",
-      error_file: "/var/log/backendvdocs/error.log",
-      out_file: "/var/log/backendvdocs/out.log",
+      error_file: "/var/log/vdocs-server/error.log",
+      out_file: "/var/log/vdocs-server/out.log",
 
       min_uptime: "30s",
       max_restarts: 5,
@@ -37,7 +37,7 @@ module.exports = {
     },
      // ===== DISPATCHER =====
     {
-      name: "backendvdocs-dispatcher",
+      name: "vdocs-server-dispatcher",
       script: "./workers/uploadDispatcher.js",
       cwd: "/var/www/backend-vdocs",
       exec_mode: "fork",
@@ -46,7 +46,7 @@ module.exports = {
 
     // ===== PDF WORKER =====
     {
-      name: "backendvdocs-pdf-worker",
+      name: "vdocs-server-pdf-worker",
       script: "./workers/pdfWorker.js",
       cwd: "/var/www/backend-vdocs",
       exec_mode: "fork",
@@ -55,7 +55,7 @@ module.exports = {
 
     // ===== DOCUMENT WORKER =====
     {
-      name: "backendvdocs-document-worker",
+      name: "vdocs-server-document-worker",
       script: "./workers/documentWorker.js",
       cwd: "/var/www/backend-vdocs",
       exec_mode: "fork",

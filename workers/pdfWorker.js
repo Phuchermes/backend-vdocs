@@ -9,6 +9,7 @@ const { generateULDPDF } = require("../services/uldPdf");
 const { generateKHPDF } = require("../services/khPdf");
 const { generateAVIHPDF } = require("../services/avihPdf");
 const { generateOffloadPDF } = require("../services/offloadPdf");
+const { generateReport35PDF } = require("../services/report35Pdf");
 
 const BASE_DIR = path.join(__dirname, "../uploads");
 
@@ -347,6 +348,68 @@ process.on("message", async (job) => {
           batch,
         });
       }
+    }
+
+    if (type === "report35" ) {
+          const metaFile = files.find(f => f.originalname === "meta.json");
+          if (!metaFile) throw new Error("Meta file missing!");
+    
+          const metaContent = await fs.promises.readFile(metaFile.tmpPath, "utf-8");
+          const { formData, rows } = JSON.parse(metaContent);
+    
+            if (!formData || Object.keys(formData).length === 0)
+              throw new Error("formData empty!");
+    
+      const pdfPath = path.join(targetDir, `GT35-${formData.location1}-${formData.location2}-${formData.day}${formData.month}${formData.year}.pdf`);
+
+      await generateReport35PDF({
+        formData,
+        rows,
+        outputPath: pdfPath,
+      });
+
+    
+      const stat = await fs.promises.stat(pdfPath);
+      const finalReport35Name = `GT35-${formData.location1}-${formData.location2}-${formData.day}${formData.month}${formData.year}.pdf`;
+      // console.log("WORKER FILE META:", files[0]);
+      // console.log("UPLOADED BY:", files[0].uploadedBy);
+      // console.log("CREATED BY:", files[0].createdBy);
+      // console.log("JOB.DATA:", job.data);
+    
+      await File.create({
+        filename: finalReport35Name,
+        path: `/${type}/${batch}/GT35-${formData.location1}-${formData.location2}-${formData.day}${formData.month}${formData.year}.pdf`,
+        mimetype: "application/pdf",
+        size: stat.size,
+        uploadedBy: files[0].uploadedBy,
+        department: files[0].department,
+        targetDept: files[0].targetDept,
+        batch,
+      });
+      const filesToUpload = files.filter(f => !f.originalname.startsWith("meta"))
+          for (const f of filesToUpload) {
+          const finalPath = path.join(targetDir, f.filename);
+          await fs.promises.rename(f.tmpPath, finalPath);
+    
+          const relativePath = finalPath
+            .replace(BASE_DIR, "")
+            .replace(/\\/g, "/");
+
+          await File.create({
+            filename: f.originalname,
+            path: relativePath,
+            mimetype: f.mimetype,
+            size: f.size,
+            uploadedBy: f.uploadedBy,
+            department: f.department,
+            targetDept: f.targetDept,
+            batch,
+          });
+          console.log("ALL FILES RECEIVED:");
+          files.forEach(f => console.log(" - ", f.originalname));
+          console.log("formData received:", formData);
+          console.log("WORKER FILE META:", files[0]);
+        }
     }
     
     process.send({ success: true });

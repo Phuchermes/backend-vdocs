@@ -12,6 +12,7 @@ const connectDB = require("./dbsetup");
 const authRoutes = require("./routes/auth");
 const documentsRoutes = require("./routes/documents");
 const filesRoutes = require("./routes/files");
+const groundOpsRouter = require ("./routes/groundops.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -54,6 +55,7 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/documents", documentsRoutes);
 app.use("/files", filesRoutes);
+app.use("/api/groundops", require("./routes/groundops"));
 
 app.get("/", (req, res) => {
   res.send("Welcome to storage VIAGS");
