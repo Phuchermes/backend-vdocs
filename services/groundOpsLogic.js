@@ -139,7 +139,7 @@ function getGroundOpsResult(formData) {
   checkDuration(cuvtStart, cuvtEnd, LIMIT_CUVT, "CUVT");
   checkDuration(fuelStart, fuelEnd, LIMIT_FUEL, "Nạp dầu");
   checkDuration(catStart, catEnd, LIMIT_CAT, "Catering");
-  checkDuration(bdtStart, bdtEnd, LIMIT_BDT, "Boarding Pax lên tàu");
+  // checkDuration(bdtStart, bdtEnd, LIMIT_BDT, "Boarding Pax lên tàu");
 
   if (prebdt == null) {
     reasons.push("Chưa nhập PreBDT");
@@ -160,6 +160,14 @@ function getGroundOpsResult(formData) {
     reasons.push(`Boarding trễ ${late} phút`);
     hasOtherViolation = true;
   }
+
+  if (bdtStart != null && bdtEnd != null) {
+    const dur = bdtEnd - bdtStart;
+    if (dur > LIMIT_BDT) {
+      reasons.push(`Boarding Pax trễ kéo dài ${dur - LIMIT_BDT} phút`);
+      hasOtherViolation = true;
+    }
+  } 
 
   // ===== FHT ONLY WHEN OTHERS OK =====
   if (!hasOtherViolation && fht > LIMIT_FHT) {
