@@ -55,7 +55,7 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/documents", documentsRoutes);
 app.use("/files", filesRoutes);
-app.use("/api/groundops", require("./routes/groundops"));
+app.use("/api/groundops", groundOpsRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to storage VIAGS");
