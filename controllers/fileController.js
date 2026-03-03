@@ -7,7 +7,7 @@ const { runUploadWorker } = require("../services/uploadQueue");
 
 // ===== CONSTANTS =====
 const BASE_DIR = path.join(__dirname, "../uploads");
-const SUB_FOLDERS = ["avih", "irregular", "uld", "kh", "offload", "report35"];
+const SUB_FOLDERS = ["avih", "irregular", "uld", "kh", "offload", "report"];
 
 // ===== INIT BASE FOLDERS (STARTUP ONLY) =====
 if (!fs.existsSync(BASE_DIR)) fs.mkdirSync(BASE_DIR);
@@ -90,7 +90,7 @@ exports.saveFile = async (req, res) => {
     } else if (type === "kh") {
       targetDept = userDept === "HDCX" ? "KH" : "HDCX";
     }
-    else if (type === "report35") {
+    else if (type === "report") {
       targetDept = userDept === "HDCX" ? "HDCX" : "HDCX";
     }
     
@@ -138,7 +138,7 @@ if (type === "offload") {
   };
 }
 
-if (type === "report35") {
+if (type === "report") {
   meta = {
     formData: req.body.formData,
     rows: req.body.rows,

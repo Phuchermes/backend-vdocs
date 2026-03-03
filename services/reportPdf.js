@@ -5,7 +5,7 @@ const fontkit = require("@pdf-lib/fontkit");
 
 const {getGroundOpsResult} = require("./groundOpsLogic"); // dùng engine chung
 
-exports.generateReport35PDF = async ({ formData, rows, outputPath }) => {
+exports.generateReportPDF = async ({ formData, rows, outputPath }) => {
   // ================= LOAD TEMPLATE =================
   const templatePath = path.join(__dirname, "../assets/7838025.pdf");
   const fontPath = path.join(__dirname, "../assets/NotoSans-Regular.ttf");
@@ -81,8 +81,15 @@ exports.generateReport35PDF = async ({ formData, rows, outputPath }) => {
   };
 
   // ================= HEADER =================
+  const typeMap = {
+    "D-0": "GT35"
+  };
+
+  const displayType =
+    typeMap[formData.reportType] || formData.reportType || "";
+
   drawCenteredText(
-    "BÁO CÁO CHUYẾN BAY GROUND TIME 35 PHÚT",
+    `BÁO CÁO CHUYẾN BAY KHÔNG ĐẠT ${displayType}`,
     height - 80,
     16
   );
@@ -105,9 +112,15 @@ exports.generateReport35PDF = async ({ formData, rows, outputPath }) => {
   cursorY -= LINE_HEIGHT;
 
   // ================= OPERATIONS =================
-  drawLabelValue("Chèn", formData.time1);
-  drawLabelValue("Khách xuống tàu", `${formData.time2} - ${formData.time3}`);
+  if (!formData.aonbtContinue) {
+    drawLabelValue("Chèn", formData.time1);
+}
+if (!formData.paxContinue) {
+    drawLabelValue("Khách xuống tàu", `${formData.time2} - ${formData.time3}`);
+}
+  if (!formData.cargoContinue) {
   drawLabelValue("Dở Hành Lý + Cargo", `${formData.time4} - ${formData.time5}`);
+}
 
   drawLabelValue(
     "Tiếp viên",
@@ -123,10 +136,16 @@ exports.generateReport35PDF = async ({ formData, rows, outputPath }) => {
       : `${formData.pilot1 || ""} - ${formData.pilot2 || ""}`
   );
 
-  drawLabelValue("Dịch Vụ Vệ Sinh", `${formData.time6} - ${formData.time7}`);
-  drawLabelValue("Cung Ứng Vật Tư", `${formData.time8} - ${formData.time9}`);
-  drawLabelValue("Nạp dầu", `${formData.time10} - ${formData.time11}`);
-  drawLabelValue("Suất Ăn", `${formData.time12} - ${formData.time13}`);
+if (!formData.dvvsContinue) {
+    drawLabelValue("Dịch Vụ Vệ Sinh", `${formData.time6} - ${formData.time7}`);
+}
+
+if (!formData.cuvtContinue) {
+    drawLabelValue("Cung Ứng Vật Tư", `${formData.time8} - ${formData.time9}`);
+}
+  
+  drawLabelValue("Nạp dầu", formData.fuelContinue ? "Đã nạp" :  `${formData.time10} - ${formData.time11}`);
+  drawLabelValue("Suất Ăn", formData.vacsContinue ? "Đã Cấp suất ăn" :  `${formData.time12} - ${formData.time13}`);
   drawLabelValue("PreBDT", formData.time14);
   drawLabelValue("Chất xếp", `${formData.time15} - ${formData.time16}`);
   drawLabelValue("Boarding", `${formData.time17} - ${formData.time18}`);
@@ -138,15 +157,27 @@ exports.generateReport35PDF = async ({ formData, rows, outputPath }) => {
   const result = getGroundOpsResult(formData);
 
   if (result.status === "PASS") {
-    drawLabelValue("=> Chuyến bay GT35", "ĐẠT");
+    drawLabelValue("=> Chuyến bay", `ĐẠT ${displayType}`);
   }
 
   if (result.status === "FAIL") {
-    drawLabelValue("=> Chuyến bay GT35 TRỄ do", "");
+  if (displayType === "GT35") {
+    drawLabelValue("=> Chuyến bay KHÔNG ĐẠT GT35 do", "");
+  }
+  else if (displayType === "GT45"){
+    drawLabelValue("=> Chuyến bay KHÔNG ĐẠT GT45 do", "");
+  } 
+  else {
+    drawLabelValue("=> Chuyến bay TRỄ do", "");
+  }
+}
+
+    if (result.status === "WARN") {
+    drawLabelValue("=> Chuyến bay", `KHÔNG ĐẠT ${formData.reportType || ""} do`);
   }
 
   if (result.status === "CALCULATING") {
-    drawLabelValue("=> Chuyến bay GT35", "Thiếu dữ liệu tính toán");
+    drawLabelValue("=> Chuyến bay", "Thiếu dữ liệu tính toán");
   }
 
   // ================= REASONS =================

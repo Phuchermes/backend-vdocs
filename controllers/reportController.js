@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
-const { generateReport35PDF } = require("../services/report35Pdf");
+const { generateReport35PDF } = require("../services/reportPdf");
 
-exports.createReport35 = async (req, res) => {
+exports.createReport = async (req, res) => {
   try {
     const formData = JSON.parse(req.body.formData);
 
@@ -11,7 +11,7 @@ exports.createReport35 = async (req, res) => {
       __dirname,
       "..",
       "uploads",
-      "report35",
+      "report",
       String(timestamp)
     );
 
@@ -20,7 +20,7 @@ exports.createReport35 = async (req, res) => {
     //  Generate PDF
     await generateReport35PDF({
       formData,
-      outputPath: path.join(baseDir, "report35.pdf"),
+      outputPath: path.join(baseDir, "report.pdf"),
     });
     
     res.json({
@@ -28,7 +28,7 @@ exports.createReport35 = async (req, res) => {
       folder: timestamp,
     });
   } catch (err) {
-    console.error("Report35 ERROR:", err);
-    res.status(500).json({ message: "Create Report35 failed" });
+    console.error("Report ERROR:", err);
+    res.status(500).json({ message: "Create Report failed" });
   }
 };
