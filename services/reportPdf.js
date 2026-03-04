@@ -162,10 +162,10 @@ if (!formData.cuvtContinue) {
 
   if (result.status === "FAIL") {
   if (displayType === "GT35") {
-    drawLabelValue("=> Chuyến bay KHÔNG ĐẠT GT35 do", "");
+    drawLabelValue("=> Chuyến bay GT35 TRỄ do", "");
   }
   else if (displayType === "GT45"){
-    drawLabelValue("=> Chuyến bay KHÔNG ĐẠT GT45 do", "");
+    drawLabelValue("=> Chuyến bay GT45 TRỄ do", "");
   } 
   else {
     drawLabelValue("=> Chuyến bay TRỄ do", "");
