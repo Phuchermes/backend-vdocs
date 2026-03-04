@@ -172,8 +172,16 @@ if (!formData.cuvtContinue) {
   }
 }
 
-    if (result.status === "WARN") {
+  if (result.status === "WARN") {
+  if (displayType === "GT35") {
+    drawLabelValue("=> Chuyến bay KHÔNG ĐẠT GT35 do", "");
+  }
+  else if (displayType === "GT45"){
+    drawLabelValue("=> Chuyến bay KHÔNG ĐẠT GT45 do", "");
+  } 
+  else {
     drawLabelValue("=> Chuyến bay", `KHÔNG ĐẠT ${formData.reportType || ""} do`);
+  }
   }
 
   if (result.status === "CALCULATING") {
