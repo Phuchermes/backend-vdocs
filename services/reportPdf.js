@@ -89,7 +89,7 @@ exports.generateReportPDF = async ({ formData, rows, outputPath }) => {
     typeMap[formData.reportType] || formData.reportType || "";
 
   drawCenteredText(
-    `BÁO CÁO CHUYẾN BAY KHÔNG ĐẠT ${displayType}`,
+    `BÁO CÁO CHUYẾN BAY ${displayType}`,
     height - 80,
     16
   );
@@ -102,7 +102,7 @@ exports.generateReportPDF = async ({ formData, rows, outputPath }) => {
     `${formData.location1}/${formData.location2}`
   );
   drawLabelValue(
-    "Ngày,Tháng,Năm",
+    "Ngày/Tháng/Năm",
     `${formData.day}/${formData.month}/${formData.year}`
   );
   drawLabelValue("Số Hiệu Tàu Bay", formData.reg);
