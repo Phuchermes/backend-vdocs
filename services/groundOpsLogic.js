@@ -388,12 +388,14 @@ if (gt === 35 && formData.reportType === "D-0") {
   const prebdt = normalizeAfterAONBT_VN(parseTime(formData.time14), aonbt);
 
   let reasons = [];
-  let hasViolation = false;
+  let hasViolation = false; //FIX BUG
 
   // ===== 5. CHECK SERVICE DURATION =====
   function checkDuration(obj, limit, label) {
     if (obj.start == null || obj.end == null) return;
+
     const dur = obj.end - obj.start;
+
     if (dur > limit) {
       reasons.push(`${label} trễ ${dur - limit} phút`);
       hasViolation = true;
@@ -406,7 +408,7 @@ if (gt === 35 && formData.reportType === "D-0") {
   checkDuration(fuel, rule.FUEL, "Nạp dầu");
   checkDuration(cat, rule.CAT, "Catering");
 
-  // ===== 6. PREBDT (theo bayType) =====
+  // ===== 6. PREBDT =====
   let PRE_LIMIT = null;
 
   if (formData.bayType === "PRE_BRIDGE") {
@@ -418,7 +420,9 @@ if (gt === 35 && formData.reportType === "D-0") {
   }
 
   if (typeof PRE_LIMIT === "number" && prebdt != null) {
+
     const LIMIT_PREBDT = aonbt + PRE_LIMIT;
+
     if (prebdt > LIMIT_PREBDT) {
       reasons.push(`PreBDT trễ ${prebdt - LIMIT_PREBDT} phút`);
       hasViolation = true;
@@ -434,7 +438,9 @@ if (gt === 35 && formData.reportType === "D-0") {
   }
 
   if (bdt.start != null && bdt.end != null) {
+
     const dur = bdt.end - bdt.start;
+
     if (dur > rule.BDT_DUR) {
       reasons.push(`Boarding kéo dài ${dur - rule.BDT_DUR} phút`);
       hasViolation = true;
@@ -442,51 +448,43 @@ if (gt === 35 && formData.reportType === "D-0") {
   }
 
   // =====================================================
-  // ===== 8. FINAL KPI LOGIC (STD ưu tiên cao nhất) =====
+  // ===== 8. FINAL KPI LOGIC (GT35 ưu tiên) =====
   // =====================================================
 
-// Ưu tiên tuyệt đối: FHT = AONBT + 35 → PASS
-if (fht === LIMIT_FHT) {
-  return {
-    status: "PASS",
-    reasons: [],
-    requireReason: false
-  };
-}
+  const stdNorm = normalizeAfterAONBT_VN(std, aonbt);
 
-// Trễ STD → FAIL
-const stdNorm = normalizeAfterAONBT_VN(std, aonbt);
+  // ===== TH2: FHT = STD nhưng vượt GT35 =====
+  if (stdNorm != null && fht === stdNorm && fht > LIMIT_FHT) {
+    return {
+      status: "WARN",
+      reasons: [
+        `Không đạt GT35 (${fht - LIMIT_FHT} phút)`,
+        ...reasons
+      ],
+      requireReason: true
+    };
+  }
 
-if (stdNorm != null && fht != null && fht > stdNorm) {
-  return {
-    status: "FAIL",
-    reasons: [
-      // `Chuyến bay trễ STD (${fhtRaw - std} phút)`,
-      `Chuyến bay GT35 Trễ (${fht - LIMIT_FHT} phút)`,
-      ...reasons
-    ],
-    requireReason: true
-  };
-}
+  // ===== TH3: vượt GT35 =====
+  if (fht > LIMIT_FHT) {
+    return {
+      status: "FAIL",
+      reasons: [
+        `Chuyến bay GT35 Trễ (${fht - LIMIT_FHT} phút)`,
+        ...reasons
+      ],
+      requireReason: true
+    };
+  }
 
-// Đạt GT (nhỏ hơn LIMIT) → PASS
-if (fht < LIMIT_FHT) {
-  return {
-    status: "PASS",
-    reasons: [],
-    requireReason: false
-  };
-}
-
-//  Không đạt GT nhưng chưa trễ STD → WARN
-return {
-  status: "WARN",
-  reasons: [
-    `Không đạt GT35 (${fht - LIMIT_FHT} phút)`,
-    ...reasons
-  ],
-  requireReason: true
-};
+  // ===== TH1: trong GT35 =====
+  if (fht <= LIMIT_FHT) {
+    return {
+      status: "PASS",
+      reasons: [],
+      requireReason: false
+    };
+  }
 }
 }
 
